@@ -2,12 +2,12 @@ import React, { createContext, useReducer } from "react";
 
 type ContextType = {
   themeState: {
-    toggle: boolean;
+    menuToggle: boolean;
   };
   dispatch: React.Dispatch<{ type: string }>;
 };
 const initState = {
-  toggle: false,
+  menuToggle: false,
 };
 
 export const themeContext = createContext<ContextType>({
@@ -16,7 +16,13 @@ export const themeContext = createContext<ContextType>({
 });
 
 const themeReducer = (state: typeof initState, action: { type: string }) => {
-  return state;
+  console.log(action);
+  switch (action.type) {
+    case "MENU_ACTION":
+      return { ...state, menuToggle: !state.menuToggle };
+    default:
+      return state;
+  }
 };
 
 const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({

@@ -1,11 +1,18 @@
 import React from "react";
-import Header from "./components/main/Header";
+import ThemeContextProvider from "./store/themeContext";
+import Header from "./components/header/Header";
+import Home from "./components/main/Home";
+import Footer from "./components/main/Footer";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    // <div className="App">
+    <ThemeContextProvider>
       <Header />
-    </div>
+      <Home />
+      <Footer />
+    </ThemeContextProvider>
+    // </div>
   );
 };
 
