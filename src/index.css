@@ -8,6 +8,11 @@ body {
   overflow: hidden;
   /* background-color: #f5f5f5; */
   /* color: #eb2b64; */
+  background-image: url(./bg.jpg);
+  background-position-x: center;
+  background-position-y: -50px;
+  background-repeat: no-repeat;
+  background-size: cover;
   background-color: #121212;
   color: #fff;
 }

@@ -54,7 +54,9 @@ export const MenuLogo = styled.div<{ isOpen: boolean }>`
 `;
 
 export const Nav = styled.nav<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
+  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
+  transition: all 0.5s linear;
   position: absolute;
   top: 0;
   left: 0;
