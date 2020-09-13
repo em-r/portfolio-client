@@ -7,7 +7,9 @@ export const Main = styled.main`
 `;
 
 export const Summary = styled.div`
-  font-size: 3rem;
+  header {
+    font-size: 3rem;
+  }
 `;
 
 export const SFooter = styled.footer`

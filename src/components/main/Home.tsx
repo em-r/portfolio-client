@@ -5,8 +5,10 @@ const Home: React.FC = () => {
   return (
     <Main>
       <div>
-        <Summary>I build amazing experiences</Summary>
-        <span>Software developer.</span>
+        <Summary>
+          <header>I build amazing experiences.</header>
+          <span>Software developer.</span>
+        </Summary>
       </div>
     </Main>
   );

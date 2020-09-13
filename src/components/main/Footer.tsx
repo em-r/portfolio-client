@@ -10,11 +10,11 @@ const Footer: React.FC = () => {
       </div>
       <div>
         <span>image</span>
-        <span>portfolio</span>
+        <span>skills</span>
       </div>
       <div>
         <span>image</span>
-        <span>portfolio</span>
+        <span>contact</span>
       </div>
     </SFooter>
   );
