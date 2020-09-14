@@ -3,11 +3,13 @@ import React, { createContext, useReducer } from "react";
 type ContextType = {
   themeState: {
     menuToggle: boolean;
+    theme: string;
   };
-  dispatch: React.Dispatch<{ type: string }>;
+  dispatch: React.Dispatch<{ type: "MENU_ACTION" | "THEME_ACTION" }>;
 };
 const initState = {
   menuToggle: false,
+  theme: "dark",
 };
 
 export const themeContext = createContext<ContextType>({
@@ -15,11 +17,17 @@ export const themeContext = createContext<ContextType>({
   dispatch: () => {},
 });
 
-const themeReducer = (state: typeof initState, action: { type: string }) => {
-  console.log(action);
+const themeReducer = (
+  state: typeof initState,
+  action: { type: "MENU_ACTION" | "THEME_ACTION" }
+) => {
+  // console.log(action, state);
   switch (action.type) {
     case "MENU_ACTION":
       return { ...state, menuToggle: !state.menuToggle };
+    case "THEME_ACTION":
+      const theme = state.theme === "dark" ? "light" : "dark";
+      return { ...state, theme };
     default:
       return state;
   }

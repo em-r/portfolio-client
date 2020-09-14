@@ -1,11 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import MenuIcon from "./MenuIcon";
-import SHeader, { SiteLogo } from "../../styles/Header";
+import SHeader, { SiteLogo, ThemeToggle } from "../../styles/Header";
 import Menu from "./Menu";
 import { themeContext } from "../../store/themeContext";
+// import Moon from "../../img/moon.svg";
+// import Sun from "../../img/sun.svg";
 
 const Header: React.FC = () => {
-  const { themeState } = useContext(themeContext);
+  const { themeState, dispatch } = useContext(themeContext);
+  useEffect(() => console.log(themeState), [themeState]);
   return (
     <SHeader>
       <div
@@ -17,6 +20,12 @@ const Header: React.FC = () => {
         }}
       >
         <MenuIcon />
+        <ThemeToggle
+          theme={themeState.theme}
+          onClick={() => dispatch({ type: "THEME_ACTION" })}
+        >
+          <div></div>
+        </ThemeToggle>
         <SiteLogo>E M R</SiteLogo>
       </div>
       <Menu isOpen={themeState.menuToggle} />

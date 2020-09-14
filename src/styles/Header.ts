@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import moon from "../img/moon.svg";
+import sun from "../img/sun.svg";
 
 export default styled.header`
   font-family: "Segoe UI";
@@ -13,7 +15,7 @@ export const SiteLogo = styled.h1`
   margin-top: 30px;
   text-align: center;
   /* color: #eb2b64; */
-  color: #fff;
+  /* color: #0555ea; */
 `;
 
 export const MenuLogo = styled.div<{ isOpen: boolean }>`
@@ -32,7 +34,7 @@ export const MenuLogo = styled.div<{ isOpen: boolean }>`
   div {
     width: 2rem;
     height: 0.25rem;
-    background: #fff;
+    background: ${({ theme }) => theme.bg_secondary};
     border-radius: 8px;
     transition: all 0.2s ease-in-out;
     &:nth-child(1) {
@@ -62,7 +64,8 @@ export const Nav = styled.nav<{ isOpen: boolean }>`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #121212;
+  background-color: ${({ theme }) => theme.bg_primary};
+  color: ${({ theme }) => theme.color_primary};
   padding: 40px 0;
   @media (min-width: 800px) {
     position: revert;
@@ -88,5 +91,18 @@ export const NavMenu = styled.div`
     font-size: 1.1em;
     gap: 0;
     margin: 20px auto;
+  }
+`;
+
+export const ThemeToggle = styled.div<{ theme: "dark" | "light" }>`
+  align-self: center;
+  cursor: pointer;
+  div {
+    background-image: url(${({ theme }) => (theme === "dark" ? sun : moon)});
+    background-repeat: no-repeat;
+    filter: invert(${({ theme }) => (theme === "dark" ? "100%" : "0%")});
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
   }
 `;

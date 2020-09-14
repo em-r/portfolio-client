@@ -1,4 +1,5 @@
 import styled from "styled-components";
+// import {} from 'styled-components/cssprop';
 
 export const Main = styled.main`
   width: 80%;
@@ -21,6 +22,7 @@ export const SFooter = styled.footer`
   display: flex;
   flex-direction: row;
   background: #0555ea;
+  color: #fff;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -30,4 +32,11 @@ export const SFooter = styled.footer`
     display: flex;
     flex-direction: column;
   }
+`;
+
+export const WrapperComp = styled.div`
+  width: 100%;
+  height: 100%;
+  background: ${({ theme }) => theme.bg_primary};
+  color: ${({ theme }) => theme.color_primary};
 `;
