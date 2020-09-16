@@ -68,10 +68,13 @@ export const Nav = styled.nav<{ isOpen: boolean }>`
   color: ${({ theme }) => theme.color_primary};
   padding: 40px 0;
   @media (min-width: 800px) {
+    visibility: visible;
+    opacity: 1;
     position: revert;
     height: revert;
     max-width: 800px;
-    display: block;
+    display: inline;
+    color: ${({ theme }) => theme.color_primary};
   }
 `;
 

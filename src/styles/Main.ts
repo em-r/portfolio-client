@@ -9,7 +9,17 @@ export const Main = styled.main`
 
 export const Summary = styled.div`
   header {
-    font-size: 3rem;
+    font-size: 2.5rem;
+  }
+`;
+
+export const Skills = styled.ul`
+  list-style: none;
+  width: 600px;
+  max-width: 90%;
+  margin: 40px auto;
+  li {
+    font-size: 1.5rem;
   }
 `;
 
