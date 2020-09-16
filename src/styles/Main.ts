@@ -13,13 +13,25 @@ export const Summary = styled.div`
   }
 `;
 
-export const Skills = styled.ul`
+export const Skills = styled.section`
   list-style: none;
   width: 600px;
   max-width: 90%;
-  margin: 40px auto;
+  margin: 30px auto;
   li {
-    font-size: 1.5rem;
+    display: flex;
+    gap: 10px;
+  }
+  li > div {
+    flex: 1;
+    h4 {
+      font-size: 1.4rem;
+      margin: 10px 0;
+    }
+  }
+  li > h4 {
+    font-size: 1.4rem;
+    align-self: center;
   }
 `;
 

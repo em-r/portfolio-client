@@ -69,6 +69,7 @@ export const Nav = styled.nav<{ isOpen: boolean }>`
   padding: 40px 0;
   @media (min-width: 800px) {
     visibility: visible;
+    transition: none;
     opacity: 1;
     position: revert;
     height: revert;

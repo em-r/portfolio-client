@@ -17,6 +17,7 @@ const Header: React.FC = () => {
           justifyContent: "space-between",
           flexDirection: "row-reverse",
           padding: "10px",
+          boxSizing: "border-box",
         }}
       >
         <MenuIcon />

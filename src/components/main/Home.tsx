@@ -1,27 +1,51 @@
 import React from "react";
 import { Main, Summary, Skills } from "../../styles/Main";
 
+const skills = [
+  {
+    emoji: "🚀",
+    title: "Backend developer",
+    stack: ["Python", "Node.js", "Go"],
+  },
+  {
+    emoji: "✨",
+    title: "Frontend developer",
+    stack: ["HTML", "CSS", "JavaScript"],
+  },
+  {
+    emoji: "🐳",
+    title: "DevOps experience",
+    stack: ["Kuberneetes", "Docker", "Azure"],
+  },
+];
+
+const RenderSkill: React.FC<{
+  emoji: string;
+  title: string;
+  stack: string[];
+}> = ({ emoji, title, stack }) => {
+  return (
+    <li>
+      <h4>{emoji}</h4>
+      <div>
+        <h4>{title}</h4>
+        <span>{stack.join(", ")}</span>
+      </div>
+    </li>
+  );
+};
+
 const Home: React.FC = () => {
   return (
     <Main>
       <div>
         <Summary>
           <header>I build amazing experiences.</header>
-          {/* <span>Software developer.</span> */}
         </Summary>
         <Skills>
-          <li>
-            <h4>✅ Backend developer</h4>
-            <span>Python, Node.js, SQL</span>
-          </li>
-          <li>
-            <h4>✅ Frontend developer</h4>
-            <span>HTML, CSS, JavaScript</span>
-          </li>
-          <li>
-            <h4>✅ Something else...</h4>
-            <span>Something else...</span>
-          </li>
+          {skills.map((skill) => (
+            <RenderSkill {...skill} key={skill.title} />
+          ))}
         </Skills>
       </div>
     </Main>
