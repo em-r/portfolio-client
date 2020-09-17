@@ -49,7 +49,12 @@ const RenderSkill: React.FC<{ skill: { title: string; stack: string[] } }> = ({
   const { title, stack } = skill;
   return (
     <div className="skill">
-      <h3>➡️ {title}</h3>
+      <h3>
+        <span role="img" aria-label="arrow">
+          ➡️
+        </span>{" "}
+        {title}
+      </h3>
       <p>{stack.join(", ")}</p>
     </div>
   );
@@ -59,7 +64,11 @@ const About: React.FC = () => {
   return (
     <Main width="800px">
       <header>
-        Hey 👋, my name is Mehdi, I'm a software developer with a mechanical
+        Hey{" "}
+        <span role="img" aria-label="waving">
+          👋
+        </span>
+        , my name is Mehdi, I'm a software developer with a mechanical
         engineering background.
       </header>
       <section>
