@@ -1,10 +1,28 @@
 import styled from "styled-components";
 // import {} from 'styled-components/cssprop';
 
-export const Main = styled.main`
+export const Main = styled.main<{ width?: string }>`
   width: 80%;
-  max-width: 500px;
+  max-width: ${({ width }) => (width ? width : "500px")};
   margin: 10px auto;
+  margin-bottom: 50px;
+  header {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  section header {
+    font-size: 1.8rem;
+  }
+  section > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  .skill p {
+    font-size: 1.1rem;
+  }
 `;
 
 export const Summary = styled.div`
@@ -58,7 +76,6 @@ export const SFooter = styled.footer`
 
 export const WrapperComp = styled.div`
   width: 100%;
-  height: 100%;
   background: ${({ theme }) => theme.bg_primary};
   color: ${({ theme }) => theme.color_primary};
 `;

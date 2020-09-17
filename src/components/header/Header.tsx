@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import MenuIcon from "./MenuIcon";
 import SHeader, { SiteLogo, ThemeToggle } from "../../styles/Header";
 import Menu from "./Menu";
@@ -17,9 +18,12 @@ const Header: React.FC = () => {
         >
           <div></div>
         </ThemeToggle>
-        <SiteLogo>E M R</SiteLogo>
+        <Menu isOpen={themeState.menuToggle} dispatch={dispatch} />
+
+        <SiteLogo>
+          <NavLink to="/">E M R</NavLink>
+        </SiteLogo>
       </div>
-      <Menu isOpen={themeState.menuToggle} />
     </SHeader>
   );
 };

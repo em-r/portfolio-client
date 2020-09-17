@@ -17,6 +17,7 @@ export default styled.header`
     box-sizing: border-box;
     max-width: 90%;
     margin: 0 auto;
+    /* gap:  */
     /* @media (min-width: 700px) {
       justify-content: space-around;
     } */
@@ -26,7 +27,8 @@ export default styled.header`
 export const SiteLogo = styled.h1`
   margin-top: 30px;
   text-align: center;
-  /* color: #eb2b64; */
+  align-self: center;
+  /* color: ${({ theme }) => theme.color_primary}; */
   /* color: #0555ea; */
 `;
 
@@ -88,6 +90,8 @@ export const Nav = styled.nav<{ isOpen: boolean }>`
     max-width: 800px;
     display: inline;
     color: ${({ theme }) => theme.color_primary};
+    flex: 1;
+    padding: 10px 0;
   }
 `;
 
