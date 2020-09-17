@@ -5,12 +5,12 @@ const skills = [
   {
     emoji: "🚀",
     title: "Backend developer",
-    stack: ["Python", "Node.js", "Go"],
+    stack: ["Python", "Go", "Node.js"],
   },
   {
     emoji: "✨",
     title: "Frontend developer",
-    stack: ["HTML", "CSS", "JavaScript"],
+    stack: ["HTML/CSS", "JavaScript/TypeScript (ES6+)"],
   },
   {
     emoji: "🐳",

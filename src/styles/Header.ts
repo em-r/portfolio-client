@@ -9,6 +9,18 @@ export default styled.header`
   /* @media (min-width: 650px) {
     justify-content: space-between;
   } */
+  > div {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    padding: 10px;
+    box-sizing: border-box;
+    max-width: 90%;
+    margin: 0 auto;
+    /* @media (min-width: 700px) {
+      justify-content: space-around;
+    } */
+  }
 `;
 
 export const SiteLogo = styled.h1`
@@ -95,6 +107,8 @@ export const NavMenu = styled.div`
     font-size: 1.1em;
     gap: 0;
     margin: 20px auto;
+    padding-bottom: 20px;
+    border-bottom: 1px solid ${({ theme }) => theme.bg_secondary};
   }
 `;
 
