@@ -1,52 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Main } from "../../styles/Main";
+import { useFetch } from "../../hooks";
 
-const dummy = [
-  {
-    title: "Programming Languages",
-    stack: ["Python", "JavaScript", "TypeScript", "Go"],
-  },
-  {
-    title: "Backend",
-    stack: ["Flask", "Django", "NodeJS", "Apollo", "GraphQL"],
-  },
-  {
-    title: "Frontend",
-    stack: [
-      "HTML/CSS",
-      "React",
-      "Redux",
-      "NextJS",
-      "ApolloClient",
-      "Styled Components",
-    ],
-  },
-  {
-    title: "UI Frameworks",
-    stack: ["Ant Design", "Material UI", "Framer Motion"],
-  },
-  {
-    title: "SQL/NoSQL Databases",
-    stack: ["SQLLite", "Postgres", "MySQL", "MongoDB", "DynamiteDB"],
-  },
-  {
-    title: "ORM/ODM",
-    stack: ["SQLAlchemy", "Django ORM", "TypeORM", "Mongoose"],
-  },
-  {
-    title: "Testing",
-    stack: ["Pytest", "Jest", "Mocha", "Selenium"],
-  },
-  {
-    title: "Data Visualization",
-    stack: ["Matplotlib", "D3", "Three.js"],
-  },
-];
-
-const RenderSkill: React.FC<{ skill: { title: string; stack: string[] } }> = ({
-  skill,
-}) => {
+type Skill = {
+  title: string;
+  stack: string[];
+};
+const RenderSkill: React.FC<{ skill: Skill }> = ({ skill }) => {
   const { title, stack } = skill;
+
   return (
     <div className="skill">
       <h3>
@@ -61,6 +23,16 @@ const RenderSkill: React.FC<{ skill: { title: string; stack: string[] } }> = ({
 };
 
 const About: React.FC = () => {
+  const [skills, setSkills] = useState<Skill[] | null>(null);
+  const fetchSkills = useFetch<{ skills: Skill[] }>("skills");
+  useEffect(() => {
+    const skillsList = async () => {
+      const list = await fetchSkills;
+      if (!list) return;
+      setSkills(list.skills);
+    };
+    skillsList();
+  }, []);
   return (
     <Main width="800px">
       <header>
@@ -74,9 +46,10 @@ const About: React.FC = () => {
       <section>
         <header>Technical Skills:</header>
         <div>
-          {dummy.map((skill) => (
-            <RenderSkill skill={skill} key={skill.title} />
-          ))}
+          {skills &&
+            skills.map((skill) => (
+              <RenderSkill skill={skill} key={skill.title} />
+            ))}
         </div>
       </section>
     </Main>
