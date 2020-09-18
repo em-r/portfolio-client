@@ -1,11 +1,16 @@
 import styled from "styled-components";
-// import {} from 'styled-components/cssprop';
 
 export const Main = styled.main<{ width?: string }>`
   width: 80%;
+  height: auto;
   max-width: ${({ width }) => (width ? width : "500px")};
   margin: 10px auto;
   margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  > * {
+    flex: 1;
+  }
   header {
     font-size: 1.5rem;
     margin-bottom: 30px;
@@ -36,6 +41,9 @@ export const Skills = styled.section`
   width: 600px;
   max-width: 90%;
   margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   li {
     display: flex;
     gap: 10px;
@@ -58,7 +66,8 @@ export const SFooter = styled.footer`
   bottom: 0;
   right: 0;
   width: 100%;
-  height: 50px;
+  height: 10%;
+  margin-top: auto;
   display: flex;
   flex-direction: row;
   background: #0555ea;
@@ -76,6 +85,7 @@ export const SFooter = styled.footer`
 
 export const WrapperComp = styled.div`
   width: 100%;
+  height: 100%;
   background: ${({ theme }) => theme.bg_primary};
   color: ${({ theme }) => theme.color_primary};
 `;

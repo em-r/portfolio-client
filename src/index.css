@@ -9,25 +9,13 @@ body {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     "Thasadith", sans-serif;
   width: 100vw;
-  height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  /* background-color: #f5f5f5; */
-  /* color: #eb2b64; */
-  /* background-color: #121212;
-  color: #fff; */
 }
 
 a {
   text-decoration: none;
   color: inherit;
-}
-
-.App {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: #1861e7;
 }
 
 #root {
