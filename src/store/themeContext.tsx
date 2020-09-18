@@ -9,7 +9,7 @@ type ContextType = {
 };
 const initState = {
   menuToggle: false,
-  theme: "dark",
+  theme: "light",
 };
 
 export const themeContext = createContext<ContextType>({

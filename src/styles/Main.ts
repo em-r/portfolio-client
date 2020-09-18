@@ -28,6 +28,25 @@ export const Main = styled.main<{ width?: string }>`
   .skill p {
     font-size: 1.1rem;
   }
+  .project {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    color: #121212;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    @media (min-width: 800px) {
+      flex-direction: row;
+    }
+    > div {
+      flex: 1;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 `;
 
 export const Summary = styled.div`
