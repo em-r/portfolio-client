@@ -4,7 +4,7 @@ import ProjectSummary from "./Summary";
 import { useFetch } from "../../hooks";
 
 type Project = {
-  title: string;
+  name: string;
   description: string;
   stack: string[];
   links: { [key: string]: string };
@@ -27,7 +27,7 @@ const Projects: React.FC = () => {
   return (
     <Main width="1000px">
       <header>Some of my work</header>
-      <section>
+      <section className="projects">
         {projects && projects.map((project) => <ProjectSummary {...project} />)}
       </section>
     </Main>

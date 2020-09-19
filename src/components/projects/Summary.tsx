@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  title: string;
+  name: string;
   description: string;
   stack: string[];
   links: { [key: string]: string };
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ProjectSummary: React.FC<Props> = ({
-  title,
+  name,
   description,
   stack,
   links,
@@ -19,7 +19,7 @@ const ProjectSummary: React.FC<Props> = ({
   return (
     <section className="project">
       <div>
-        <h2>{title}</h2>
+        <h2>{name}</h2>
         <details open>{description}</details>
         <p>Stack: {stack.join(", ")}</p>
         <div>

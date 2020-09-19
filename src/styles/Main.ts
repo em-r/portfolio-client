@@ -28,6 +28,11 @@ export const Main = styled.main<{ width?: string }>`
   .skill p {
     font-size: 1.1rem;
   }
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
   .project {
     display: flex;
     flex-direction: column;
