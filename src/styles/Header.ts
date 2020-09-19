@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import moon from "../img/moon.svg";
-import sun from "../img/sun.svg";
+import moon from "../assets/moon.svg";
+import sun from "../assets/sun.svg";
 
 export default styled.header`
   font-family: "Segoe UI";
