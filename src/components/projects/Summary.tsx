@@ -26,7 +26,11 @@ const ProjectSummary: React.FC<Props> = ({
           <h4>Links</h4>
           {linksTo.map((link) => (
             <p>
-              <a href={`${links[link]}`} target="_blank">
+              <a
+                href={`${links[link]}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {link}
               </a>
             </p>
@@ -34,7 +38,7 @@ const ProjectSummary: React.FC<Props> = ({
         </div>
       </div>
       <div>
-        <img src={thumbnail}></img>
+        <img src={thumbnail} alt={name}></img>
       </div>
     </section>
   );

@@ -3,7 +3,7 @@
 //   message: string;
 // }
 
-type endpoint = "blog" | "project" | "projects" | "skills";
+type endpoint = "blogs" | "project" | "projects" | "skills";
 type variables = { [key: string]: string | number } | undefined;
 
 export const useFetch = async <T>(

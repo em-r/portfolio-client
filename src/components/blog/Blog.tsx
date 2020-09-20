@@ -2,24 +2,23 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useFetch } from "../../hooks";
 import BlogSummary from "./Summary";
 import { Main } from "../../styles/Main";
-import { blogs } from "./dummy";
 
 type Post = {
   id: number;
   title: string;
   body: string;
   // tags: string[];
-  date: string;
+  // posted: string;
 };
 
 const Blog: React.FC = () => {
   const [total, setTotal] = useState<number>(0);
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
-  const [hasMore, setHasMore] = useState<boolean>(false);
-  const [perPage] = useState<number>(4);
+  // const [hasMore, setHasMore] = useState<boolean>(false);
+  const [perPage] = useState<number>(2);
   const [pageNum, setPageNum] = useState<number>(0);
-  // const fetchPosts = useFetch<{ total: number; blogs: Post[] }>("blog");
+  const fetchPosts = useFetch<{ total: number; blogs: Post[] }>("blogs");
 
   const observer = useRef<any>();
   const lastPostRef = useCallback(
@@ -29,12 +28,11 @@ const Blog: React.FC = () => {
       }
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
-          console.log(posts);
+          setPageNum((pageNum) => pageNum + 1);
           setPosts([
             ...posts,
-            ...blogs.slice(posts.length, posts.length + perPage),
+            ...allPosts.slice(posts.length, posts.length + perPage),
           ]);
-          console.log(blogs);
         }
       });
       if (node) {
@@ -46,21 +44,21 @@ const Blog: React.FC = () => {
 
   useEffect(() => {
     const postsList = async () => {
-      // const list = await fetchPosts;
-      // if (!list) return null;
-      // const { total, blogs } = list;
-      // setTotal(total);
-      // setPosts(blogs.slice(0,perPage));
-      // setAllPosts(blogs.slice(perPage));
-      setAllPosts(blogs);
-      setTotal(blogs.length);
+      const list = await fetchPosts;
+      if (!list) return null;
+      const { total, blogs } = list;
+      setTotal(total);
       setPosts(blogs.slice(0, perPage));
-      setPageNum((pageNum) => pageNum + 1);
+      setAllPosts(blogs);
+      // setAllPosts(blogs);
+      // setTotal(blogs.length);
+      // setPosts(blogs.slice(0, perPage));
     };
     postsList();
   }, []);
 
-  useEffect(() => setHasMore(total > 0), [blogs]);
+  useEffect(() => setTotal(allPosts.length - posts.length), [allPosts, posts]);
+  // useEffect(() => setHasMore(total > 0), [total]);
 
   return (
     <Main width="800px">
