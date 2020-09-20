@@ -28,19 +28,23 @@ export const Main = styled.main<{ width?: string }>`
   .skill p {
     font-size: 1.1rem;
   }
-  .projects {
+  .projects,
+  .blogs {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
-  .project {
+  .project,
+  .blog {
     display: flex;
     flex-direction: column;
-    background: #fff;
-    color: #121212;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  }
+  .project {
+    background: #fff;
+    color: #121212;
     @media (min-width: 800px) {
       flex-direction: row;
     }
@@ -50,6 +54,17 @@ export const Main = styled.main<{ width?: string }>`
     img {
       width: 100%;
       height: 100%;
+    }
+  }
+  .blog header {
+    display: flex;
+    a {
+      color: ${({ theme }) => theme.color_anchor};
+    }
+    .date {
+      margin-left: auto;
+      font-size: 0.9rem;
+      align-self: flex-end;
     }
   }
 `;

@@ -7,6 +7,7 @@ import Header from "./header/Header";
 import Home from "./main/Home";
 import About from "./about/About";
 import Projects from "./projects/Projects";
+import Blog from "./blog/Blog";
 import Footer from "./main/Footer";
 import { lightTheme, darkTheme } from "../styles/Themes";
 
@@ -25,6 +26,7 @@ const Wrapper: React.FC = () => {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/projects" component={Projects} />
+        <Route path="/blog" component={Blog} />
         <Footer />
       </WrapperComp>
     </ThemeProvider>
