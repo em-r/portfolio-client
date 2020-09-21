@@ -23,7 +23,9 @@ const DesktopFooter: React.FC = () => {
   return (
     <SFooter className="desktop">
       {items.map(({ icon, link }) => (
-        <a href={link}>{icon}</a>
+        <a href={link} target="_blank" rel="noopener noreferrer">
+          {icon}
+        </a>
       ))}
     </SFooter>
   );

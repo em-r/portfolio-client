@@ -1,13 +1,14 @@
 import React from "react";
+import { FooterWrapper } from "../../styles/Main";
 import MobileFooter from "./Mobile";
 import DesktopFooter from "./Desktop";
 
 const Footer: React.FC = () => {
   return (
-    <footer style={{ height: "20vh" }}>
+    <FooterWrapper>
       <MobileFooter />
       <DesktopFooter />
-    </footer>
+    </FooterWrapper>
   );
 };
 

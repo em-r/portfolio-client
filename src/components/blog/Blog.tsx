@@ -16,7 +16,7 @@ const Blog: React.FC = () => {
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
   const [perPage] = useState<number>(2);
-  const [pageNum, setPageNum] = useState<number>(0);
+  const [, setPageNum] = useState<number>(0);
   const fetchPosts = useFetch<{ total: number; blogs: Post[] }>("blogs");
 
   const observer = useRef<any>();
@@ -38,6 +38,7 @@ const Blog: React.FC = () => {
         observer.current.observe(node);
       }
     },
+    // eslint-disable-next-line
     [total]
   );
 
@@ -51,6 +52,7 @@ const Blog: React.FC = () => {
       setAllPosts(blogs);
     };
     postsList();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => setTotal(allPosts.length - posts.length), [allPosts, posts]);

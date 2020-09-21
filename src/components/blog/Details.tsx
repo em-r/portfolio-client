@@ -25,6 +25,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ id: string }>> = ({
       setBlog(details.blog);
     };
     blogDetails();
+    // eslint-disable-next-line
   }, []);
 
   if (!blog) return null;

@@ -22,6 +22,7 @@ const Projects: React.FC = () => {
       setProjects(list.projects);
     };
     projectList();
+    // eslint-disable-next-line
   }, []);
 
   return (

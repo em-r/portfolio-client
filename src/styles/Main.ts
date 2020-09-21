@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Main = styled.main<{ width?: string }>`
   width: 80%;
-  height: auto;
+  min-height: 90vh;
   max-width: ${({ width }) => (width ? width : "500px")};
   margin: 10px auto;
   margin-bottom: 50px;
@@ -10,6 +10,9 @@ export const Main = styled.main<{ width?: string }>`
   flex-direction: column;
   > * {
     flex: 1;
+  }
+  > section {
+    margin-bottom: 20px;
   }
   header {
     font-size: 1.5rem;
@@ -100,26 +103,27 @@ export const Skills = styled.section`
   }
 `;
 
-export const SFooter = styled.div`
+export const FooterWrapper = styled.footer`
   position: fixed;
   bottom: 0;
-  right: 0;
   width: 100%;
-  height: 10%;
-  margin-top: auto;
+  height: 10vh;
+  padding: 0;
+  @media (min-width: 800px) {
+    color: ${({ theme }) => theme.color_secondary};
+    background: ${({ theme }) => theme.bg_secondary};
+  }
+`;
+
+export const SFooter = styled.div`
+  margin: 0 auto;
+  height: 100%;
   display: flex;
   flex-direction: row;
-  /* background: #0555ea; */
-  /* color: #fff; */
   justify-content: center;
   align-items: center;
   text-align: center;
   font-size: 0.8rem;
-  /* div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  } */
 `;
 
 export const WrapperComp = styled.div`

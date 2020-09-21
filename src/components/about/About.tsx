@@ -32,6 +32,7 @@ const About: React.FC = () => {
       setSkills(list.skills);
     };
     skillsList();
+    // eslint-disable-next-line
   }, []);
   return (
     <Main width="800px">
