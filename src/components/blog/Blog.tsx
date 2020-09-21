@@ -43,6 +43,7 @@ const Blog: React.FC = () => {
   );
 
   useEffect(() => {
+    document.title = "EMR - Blog";
     const postsList = async () => {
       const list = await fetchPosts;
       if (!list) return null;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import MenuIcon from "./MenuIcon";
 import SHeader, { SiteLogo, ThemeToggle } from "../../styles/Header";
@@ -7,7 +7,7 @@ import { themeContext } from "../../store/themeContext";
 
 const Header: React.FC = () => {
   const { themeState, dispatch } = useContext(themeContext);
-  useEffect(() => console.log(themeState), [themeState]);
+
   return (
     <SHeader>
       <div>

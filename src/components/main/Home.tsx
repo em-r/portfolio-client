@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Main, Summary, Skills } from "../../styles/Main";
 
 const skills = [
@@ -36,6 +36,9 @@ const RenderSkill: React.FC<{
 };
 
 const Home: React.FC = () => {
+  useEffect(() => {
+    document.title = "EMR - Home";
+  });
   return (
     <Main>
       <div>

@@ -26,6 +26,7 @@ const About: React.FC = () => {
   const [skills, setSkills] = useState<Skill[] | null>(null);
   const fetchSkills = useFetch<{ skills: Skill[] }>("skills");
   useEffect(() => {
+    document.title = "EMR - About";
     const skillsList = async () => {
       const list = await fetchSkills;
       if (!list) return;

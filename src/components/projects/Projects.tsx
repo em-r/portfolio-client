@@ -16,6 +16,7 @@ const Projects: React.FC = () => {
   const fetchProjects = useFetch<{ projects: Project[] }>("projects");
 
   useEffect(() => {
+    document.title = "EMR - Projects";
     const projectList = async () => {
       const list = await fetchProjects;
       if (!list) return null;

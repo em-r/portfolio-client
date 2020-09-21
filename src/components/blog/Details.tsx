@@ -19,6 +19,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ id: string }>> = ({
   const fetchBlog = useFetch<{ blog: Blog }>("blog", { id: parseInt(id) });
 
   useEffect(() => {
+    document.title = "EMR - Blog";
     const blogDetails = async () => {
       const details = await fetchBlog;
       if (!details) return;
