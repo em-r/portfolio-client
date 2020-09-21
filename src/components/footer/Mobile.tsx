@@ -33,16 +33,14 @@ const RenderItems: React.FC<Item> = ({ emoji, text, link }) => {
   );
 };
 
-const Footer: React.FC = () => {
+const MobileFooter: React.FC = () => {
   return (
-    <div style={{ height: "20vh" }}>
-      <SFooter>
-        {footerItems.map((item) => (
-          <RenderItems {...item} key={item.text} />
-        ))}
-      </SFooter>
-    </div>
+    <SFooter className="mobile">
+      {footerItems.map((item) => (
+        <RenderItems {...item} key={item.text} />
+      ))}
+    </SFooter>
   );
 };
 
-export default Footer;
+export default MobileFooter;

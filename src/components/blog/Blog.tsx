@@ -8,14 +8,13 @@ type Post = {
   title: string;
   body: string;
   // tags: string[];
-  // posted: string;
+  posted: string;
 };
 
 const Blog: React.FC = () => {
   const [total, setTotal] = useState<number>(0);
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
-  // const [hasMore, setHasMore] = useState<boolean>(false);
   const [perPage] = useState<number>(2);
   const [pageNum, setPageNum] = useState<number>(0);
   const fetchPosts = useFetch<{ total: number; blogs: Post[] }>("blogs");
@@ -50,15 +49,11 @@ const Blog: React.FC = () => {
       setTotal(total);
       setPosts(blogs.slice(0, perPage));
       setAllPosts(blogs);
-      // setAllPosts(blogs);
-      // setTotal(blogs.length);
-      // setPosts(blogs.slice(0, perPage));
     };
     postsList();
   }, []);
 
   useEffect(() => setTotal(allPosts.length - posts.length), [allPosts, posts]);
-  // useEffect(() => setHasMore(total > 0), [total]);
 
   return (
     <Main width="800px">

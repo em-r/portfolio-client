@@ -16,7 +16,7 @@ const Menu: React.FC<Props> = ({ isOpen, dispatch }) => {
         {items.map((item) => (
           <div key={item} style={{ flex: 1 }}>
             <NavLink
-              to={item}
+              to={`/${item}`}
               style={{ textTransform: "uppercase" }}
               onClick={() => dispatch({ type: "MENU_ACTION" })}
             >

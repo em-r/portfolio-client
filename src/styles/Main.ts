@@ -100,7 +100,7 @@ export const Skills = styled.section`
   }
 `;
 
-export const SFooter = styled.footer`
+export const SFooter = styled.div`
   position: fixed;
   bottom: 0;
   right: 0;
@@ -109,17 +109,17 @@ export const SFooter = styled.footer`
   margin-top: auto;
   display: flex;
   flex-direction: row;
-  background: #0555ea;
-  color: #fff;
+  /* background: #0555ea; */
+  /* color: #fff; */
   justify-content: center;
   align-items: center;
   text-align: center;
   font-size: 0.8rem;
-  div {
+  /* div {
     flex: 1;
     display: flex;
     flex-direction: column;
-  }
+  } */
 `;
 
 export const WrapperComp = styled.div`

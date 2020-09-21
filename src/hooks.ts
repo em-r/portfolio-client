@@ -3,7 +3,7 @@
 //   message: string;
 // }
 
-type endpoint = "blogs" | "project" | "projects" | "skills";
+type endpoint = "blog" | "blogs" | "project" | "projects" | "skills";
 type variables = { [key: string]: string | number } | undefined;
 
 export const useFetch = async <T>(
@@ -11,7 +11,7 @@ export const useFetch = async <T>(
   variables: variables = undefined
 ): Promise<T | null> => {
   let base: string = `/api/${endpoint}`;
-  if (endpoint === "project") {
+  if (endpoint === "blog") {
     const { id } = variables as any;
     base += `/${id}`;
   }
