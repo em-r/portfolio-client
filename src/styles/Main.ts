@@ -70,6 +70,52 @@ export const Main = styled.main<{ width?: string }>`
       align-self: flex-end;
     }
   }
+  .contact-heading {
+    h2 {
+      font-family: "Thasadith";
+      text-align: center;
+    }
+    a {
+      color: ${({ theme }) => theme.color_anchor};
+    }
+    > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .split {
+      height: 2px;
+      background: ${({ theme }) => theme.color_primary};
+      flex: 1;
+    }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  form > * {
+    display: block;
+    width: 100%;
+    border: 1px solid ${({ theme }) => theme.color_primary};
+    border-radius: 5px;
+    padding: 10px;
+  }
+  form input {
+    font-size: 2rem;
+  }
+  form textarea {
+    resize: vertical;
+    min-height: 200px;
+    font-size: 1.7rem;
+  }
+  form button {
+    background: #0555ea;
+    color: #fff;
+    border: 1px solid #fff;
+    font-size: 1.5rem;
+  }
 `;
 
 export const Summary = styled.div`

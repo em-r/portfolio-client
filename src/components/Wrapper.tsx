@@ -6,9 +6,10 @@ import { WrapperComp } from "../styles/Main";
 import Header from "./header/Header";
 import Home from "./main/Home";
 import About from "./about/About";
-import Projects from "./projects/Projects";
 import Blog from "./blog/Blog";
 import BlogDetails from "./blog/Details";
+import Contact from "./contact/Contact";
+import Projects from "./projects/Projects";
 import Footer from "./footer/Footer";
 import { lightTheme, darkTheme } from "../styles/Themes";
 
@@ -29,6 +30,7 @@ const Wrapper: React.FC = () => {
         <Route path="/projects" component={Projects} />
         <Route path="/blogs/:id" component={BlogDetails} />
         <Route exact path="/blog" component={Blog} />
+        <Route path="/contact" component={Contact} />
         <Footer />
       </WrapperComp>
     </ThemeProvider>
