@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Success from "./Success";
 import Error from "./Error";
 import { usePost } from "../../hooks";
@@ -23,9 +23,7 @@ const Form: React.FC = () => {
       setSuccess(true);
     }
   };
-  useEffect(() => {
-    console.log(errorMessage);
-  }, [errorMessage]);
+
   if (success) {
     return <Success />;
   }
