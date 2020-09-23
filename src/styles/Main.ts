@@ -71,6 +71,7 @@ export const Main = styled.main<{ width?: string }>`
     }
   }
   .contact-heading {
+    flex: 0;
     h2 {
       font-family: "Thasadith";
       text-align: center;
@@ -115,6 +116,7 @@ export const Main = styled.main<{ width?: string }>`
     color: #fff;
     border: 1px solid #fff;
     font-size: 1.5rem;
+    cursor: pointer;
   }
 `;
 

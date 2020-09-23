@@ -13,11 +13,8 @@ const BlogSummary: React.FC<Props> = ({ id, title, posted, body, myRef }) => {
   return (
     <section className="blog" ref={myRef}>
       <header>
-        <a href={`/blogs/${id}`} className="App-link">
-          {title}
-        </a>
+        <a href={`/blogs/${id}`}>{title}</a>
         <span className="date">{dayjs(posted).format("DD/MM/YYYY")}</span>
-        {/* <span className="date">09/20/2020</span> */}
       </header>
       <p>{body}</p>
     </section>
