@@ -11,8 +11,7 @@ export const useFetch = async <T>(
   endpoint: endpoint,
   variables: variables = undefined
 ): Promise<T | null> => {
-  // let base: string = `https://iammehdi.herokuapp.com/api/${endpoint}`;
-  let base: string = `http://127.0.0.1:5000/api/${endpoint}`;
+  let base: string = `https://iammehdi.herokuapp.com/api/${endpoint}`;
   if (endpoint === "blog") {
     const { id } = variables as any;
     base += `/${id}`;
@@ -45,6 +44,7 @@ export const usePost = async (
       "content-type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    mode: "cors",
   };
   try {
     const res = await fetch(
