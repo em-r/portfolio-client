@@ -53,10 +53,10 @@ export const Main = styled.main<{ width?: string }>`
     }
     > div {
       flex: 1;
+      align-self: center;
     }
     img {
       width: 100%;
-      height: 100%;
     }
   }
   .blog header {

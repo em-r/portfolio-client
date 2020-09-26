@@ -15,7 +15,7 @@ const skills = [
   {
     emoji: "🐳",
     title: "DevOps experience",
-    stack: ["Kuberneetes", "Docker", "Azure"],
+    stack: ["Docker", "Heroku"],
   },
 ];
 
