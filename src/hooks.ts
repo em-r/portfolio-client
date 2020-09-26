@@ -11,14 +11,15 @@ export const useFetch = async <T>(
   endpoint: endpoint,
   variables: variables = undefined
 ): Promise<T | null> => {
-  let base: string = `/api/${endpoint}`;
+  // let base: string = `https://iammehdi.herokuapp.com/api/${endpoint}`;
+  let base: string = `http://127.0.0.1:5000/api/${endpoint}`;
   if (endpoint === "blog") {
     const { id } = variables as any;
     base += `/${id}`;
   }
 
   try {
-    const response = await fetch(base);
+    const response = await fetch(base, { mode: "cors" });
     const body = await response.json();
     return body;
   } catch (e) {
@@ -46,7 +47,10 @@ export const usePost = async (
     },
   };
   try {
-    const res = await fetch("/api/contact", params);
+    const res = await fetch(
+      "https://iammehdi.herokuapp.com/api/contact",
+      params
+    );
     const resBody = await res.json();
     if (res.status === 400) {
       const success = false;

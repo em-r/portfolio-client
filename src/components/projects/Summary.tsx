@@ -25,7 +25,7 @@ const ProjectSummary: React.FC<Props> = ({
         <div>
           <h4>Links</h4>
           {linksTo.map((link) => (
-            <p>
+            <p key={link}>
               <a
                 href={`${links[link]}`}
                 target="_blank"

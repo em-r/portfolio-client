@@ -30,7 +30,10 @@ const Projects: React.FC = () => {
     <Main width="1000px">
       <header>Some of my work</header>
       <section className="projects">
-        {projects && projects.map((project) => <ProjectSummary {...project} />)}
+        {projects &&
+          projects.map((project) => (
+            <ProjectSummary {...project} key={project.name} />
+          ))}
       </section>
     </Main>
   );
