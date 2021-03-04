@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { BiTimer, BiRightArrowCircle } from "react-icons/bi";
 import { FaCalendarAlt } from "react-icons/fa";
@@ -23,23 +24,25 @@ const BlogSummary: React.FC<Props> = ({
     <Summary ref={myRef}>
       <section className="body">
         <header>
-          <a href={`/blogs/${id}`}>{title}</a>
+          <Link to={`/blogs/${id}`}>{title}</Link>
         </header>
         <p>{summary}</p>
       </section>
       <section className="meta-data">
-        <p>
+        <p title="Posted on">
           <FaCalendarAlt />
           <time dateTime={dayjs(posted).format("DD/MM/YYYY")}>
             {dayjs(posted).format("DD/MM/YYYY")}
           </time>
         </p>
-        <p>
+        <p title="Time to read">
           <BiTimer size={22} />
           <span>6 mins</span>
         </p>
-        <p>
-          <BiRightArrowCircle size={30} style={{ cursor: "pointer" }} />
+        <p title="Read article">
+          <Link to={`/blogs/${id}`}>
+            <BiRightArrowCircle size={30} style={{ cursor: "pointer" }} />
+          </Link>
         </p>
       </section>
     </Summary>
