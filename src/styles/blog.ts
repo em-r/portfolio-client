@@ -8,6 +8,7 @@ export const Summary = styled.section`
         display: flex;
         flex-direction: column;
         flex: 3;
+        padding: 0 10px;
         header {
             font-family: Mosk, sans-serif;
         }
@@ -16,12 +17,13 @@ export const Summary = styled.section`
         }
     }
     .meta-data {
+        font-family: Mosk, sans-serif;
         display: flex;
         flex-direction: row;
         gap: 10px;
         background: #0555ea;
         color: #FFFFFF;
-        justify-content: center;
+        justify-content: space-evenly;
         p {
             display: flex;
             align-items: center;
@@ -31,6 +33,7 @@ export const Summary = styled.section`
 
         @media (min-width: 600px){
             flex-direction: column;
+            padding: 0 5px;
         }
     }
     @media (min-width: 600px){

@@ -1,7 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
-import { BiTimer } from "react-icons/bi";
-import { FaCalendarAlt } from "react-icons/all";
+import { BiTimer, BiRightArrowCircle } from "react-icons/bi";
+import { FaCalendarAlt } from "react-icons/fa";
 import { Summary } from "../../styles/blog";
 
 type Props = {
@@ -37,6 +37,9 @@ const BlogSummary: React.FC<Props> = ({
         <p>
           <BiTimer size={22} />
           <span>6 mins</span>
+        </p>
+        <p>
+          <BiRightArrowCircle size={30} style={{ cursor: "pointer" }} />
         </p>
       </section>
     </Summary>
