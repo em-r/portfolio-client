@@ -21,7 +21,8 @@ export const Main = styled.main<{ width?: string }>`
   section header {
     font-size: 1.8rem;
   }
-  section > div {
+  /* section > div { */
+  section  div {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -40,12 +41,12 @@ export const Main = styled.main<{ width?: string }>`
   .project,
   .blog {
     display: flex;
-    flex-direction: column;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   }
   .project {
+    flex-direction: column;
     background: #fff;
     color: #121212;
     @media (min-width: 800px) {
@@ -68,6 +69,12 @@ export const Main = styled.main<{ width?: string }>`
       margin-left: auto;
       font-size: 0.9rem;
       align-self: flex-end;
+    }
+    .blog-meta-data {
+      margin-left: auto;
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
     }
   }
   .contact-heading {

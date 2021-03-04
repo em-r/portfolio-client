@@ -6,10 +6,35 @@ import { Main } from "../../styles/Main";
 type Post = {
   id: number;
   title: string;
-  body: string;
+  // body: string;
+  summary: string;
   // tags: string[];
-  posted: string;
+  posted: string | Date;
 };
+
+const blogPosts: Post[] = [
+  {
+    id: 1,
+    title: "Some random shit",
+    summary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet?",
+    posted: new Date(),
+  },
+  {
+    id: 2,
+    title: "Some random stuff",
+    summary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet?",
+    posted: new Date(),
+  },
+  {
+    id: 3,
+    title: "Some random business",
+    summary:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet?",
+    posted: new Date(),
+  },
+];
 
 const Blog: React.FC = () => {
   const [total, setTotal] = useState<number>(0);
@@ -44,19 +69,25 @@ const Blog: React.FC = () => {
 
   useEffect(() => {
     document.title = "EMR - Blog";
-    const postsList = async () => {
-      const list = await fetchPosts;
-      if (!list) return null;
-      const { total, blogs } = list;
-      setTotal(total);
-      setPosts(blogs.slice(0, perPage));
-      setAllPosts(blogs);
-    };
-    postsList();
+    // const postsList = async () => {
+    //   const list = await fetchPosts;
+    //   if (!list) return null;
+    //   const { total, blogs } = list;
+    //   setTotal(total);
+    //   setPosts(blogs.slice(0, perPage));
+    //   setAllPosts(blogs);
+    // };
+    // postsList();
+    setTotal(blogPosts.length);
+    setPosts(blogPosts.slice(0, perPage));
+    setAllPosts(blogPosts);
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => setTotal(allPosts.length - posts.length), [allPosts, posts]);
+  useEffect(() => {
+    console.log(posts);
+    setTotal(allPosts.length - posts.length);
+  }, [allPosts, posts]);
 
   return (
     <Main width="800px">

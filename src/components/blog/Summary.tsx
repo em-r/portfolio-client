@@ -1,23 +1,45 @@
 import React from "react";
 import dayjs from "dayjs";
+import { BiTimer } from "react-icons/bi";
+import { FaCalendarAlt } from "react-icons/all";
+import { Summary } from "../../styles/blog";
 
 type Props = {
   id: number;
   title: string;
-  posted: string;
-  body: string;
+  posted: string | Date;
+  summary: string;
   myRef?: (n: any) => void;
 };
 
-const BlogSummary: React.FC<Props> = ({ id, title, posted, body, myRef }) => {
+const BlogSummary: React.FC<Props> = ({
+  id,
+  title,
+  posted,
+  summary,
+  myRef,
+}) => {
   return (
-    <section className="blog" ref={myRef}>
-      <header>
-        <a href={`/blogs/${id}`}>{title}</a>
-        <span className="date">{dayjs(posted).format("DD/MM/YYYY")}</span>
-      </header>
-      <p>{body}</p>
-    </section>
+    <Summary ref={myRef}>
+      <section className="body">
+        <header>
+          <a href={`/blogs/${id}`}>{title}</a>
+        </header>
+        <p>{summary}</p>
+      </section>
+      <section className="meta-data">
+        <p>
+          <FaCalendarAlt />
+          <time dateTime={dayjs(posted).format("DD/MM/YYYY")}>
+            {dayjs(posted).format("DD/MM/YYYY")}
+          </time>
+        </p>
+        <p>
+          <BiTimer size={22} />
+          <span>6 mins</span>
+        </p>
+      </section>
+    </Summary>
   );
 };
 
