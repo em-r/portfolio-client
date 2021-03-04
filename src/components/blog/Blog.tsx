@@ -1,38 +1,31 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useFetch } from "../../hooks";
+import { useQuery } from "@apollo/client";
 import BlogSummary from "./Summary";
 import { Main } from "../../styles/Main";
+import { getBlogs } from "../../gql/blog";
 
 type Post = {
   id: string;
   title: string;
   summary: string;
-  posted: string | Date;
+  readTime: number;
+  publishedAt: string | Date;
 };
 
-const blogPosts: Post[] = [
-  {
-    id: "1",
-    title: "Some random shit",
-    summary:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet?",
-    posted: new Date(),
-  },
-  {
-    id: "2",
-    title: "Some random stuff",
-    summary:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet?",
-    posted: new Date(),
-  },
-  {
-    id: "3",
-    title: "Some random business",
-    summary:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet?",
-    posted: new Date(),
-  },
-];
+type BlogPostItem = {
+  title: string;
+  summary: string;
+  readTime: number;
+  sys: {
+    id: string;
+    firstPublishedAt: string | Date;
+  };
+};
+
+type BlogPostCollection = {
+  total: number;
+  items: BlogPostItem[];
+};
 
 const Blog: React.FC = () => {
   const [total, setTotal] = useState<number>(0);
@@ -40,7 +33,9 @@ const Blog: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [perPage] = useState<number>(2);
   const [, setPageNum] = useState<number>(0);
-  const fetchPosts = useFetch<{ total: number; blogs: Post[] }>("blogs");
+  const { data } = useQuery<{
+    blogPostCollection: BlogPostCollection;
+  }>(getBlogs);
 
   const observer = useRef<any>();
   const lastPostRef = useCallback(
@@ -49,7 +44,7 @@ const Blog: React.FC = () => {
         observer.current!.disconnect();
       }
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && total > perPage) {
           setPageNum((pageNum) => pageNum + 1);
           setPosts([
             ...posts,
@@ -67,25 +62,30 @@ const Blog: React.FC = () => {
 
   useEffect(() => {
     document.title = "EMR - Blog";
-    // const postsList = async () => {
-    //   const list = await fetchPosts;
-    //   if (!list) return null;
-    //   const { total, blogs } = list;
-    //   setTotal(total);
-    //   setPosts(blogs.slice(0, perPage));
-    //   setAllPosts(blogs);
-    // };
-    // postsList();
-    setTotal(blogPosts.length);
-    setPosts(blogPosts.slice(0, perPage));
-    setAllPosts(blogPosts);
-    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    console.log(posts);
-    setTotal(allPosts.length - posts.length);
-  }, [allPosts, posts]);
+    if (data) {
+      const {
+        blogPostCollection: { items },
+      } = data;
+      const blogPosts: Post[] = items.map(
+        ({ sys, title, summary, readTime }) => ({
+          id: sys.id,
+          title,
+          summary,
+          readTime,
+          publishedAt: sys.firstPublishedAt,
+        })
+      );
+      setPosts(blogPosts.slice(0, perPage));
+      setAllPosts(blogPosts);
+      setTotal(total);
+    }
+    // eslint-disable-next-line
+  }, [data]);
+
+  useEffect(() => setTotal(allPosts.length - posts.length), [allPosts, posts]);
 
   return (
     <Main width="800px">

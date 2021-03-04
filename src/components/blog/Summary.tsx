@@ -8,16 +8,18 @@ import { Summary } from "../../styles/blog";
 type Props = {
   id: string;
   title: string;
-  posted: string | Date;
+  publishedAt: string | Date;
   summary: string;
+  readTime: number;
   myRef?: (n: any) => void;
 };
 
 const BlogSummary: React.FC<Props> = ({
   id,
   title,
-  posted,
+  publishedAt,
   summary,
+  readTime,
   myRef,
 }) => {
   return (
@@ -31,13 +33,13 @@ const BlogSummary: React.FC<Props> = ({
       <section className="meta-data">
         <p title="Posted on">
           <FaCalendarAlt />
-          <time dateTime={dayjs(posted).format("DD/MM/YYYY")}>
-            {dayjs(posted).format("DD/MM/YYYY")}
+          <time dateTime={dayjs(publishedAt).format("DD/MM/YYYY")}>
+            {dayjs(publishedAt).format("DD/MM/YYYY")}
           </time>
         </p>
         <p title="Time to read">
           <BiTimer size={22} />
-          <span>6 mins</span>
+          <span>{readTime} mins</span>
         </p>
         <p title="Read article">
           <Link to={`/blogs/${id}`}>
