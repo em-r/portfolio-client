@@ -4,31 +4,29 @@ import BlogSummary from "./Summary";
 import { Main } from "../../styles/Main";
 
 type Post = {
-  id: number;
+  id: string;
   title: string;
-  // body: string;
   summary: string;
-  // tags: string[];
   posted: string | Date;
 };
 
 const blogPosts: Post[] = [
   {
-    id: 1,
+    id: "1",
     title: "Some random shit",
     summary:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet?",
     posted: new Date(),
   },
   {
-    id: 2,
+    id: "2",
     title: "Some random stuff",
     summary:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet?",
     posted: new Date(),
   },
   {
-    id: 3,
+    id: "3",
     title: "Some random business",
     summary:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos at ipsam, dignissimos modi quisquam, dolores officiis recusandae minima fugiat quidem consequuntur! At dignissimos numquam obcaecati quidem excepturi ab quasi eveniet?",

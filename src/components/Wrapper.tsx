@@ -7,7 +7,7 @@ import Header from "./header/Header";
 import Home from "./main/Home";
 import About from "./about/About";
 import Blog from "./blog/Blog";
-import BlogDetails from "./blog/Details";
+import BlogPost from "./blog/Post";
 import Contact from "./contact/Contact";
 import Projects from "./projects/Projects";
 import Footer from "./footer/Footer";
@@ -28,7 +28,7 @@ const Wrapper: React.FC = () => {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/projects" component={Projects} />
-        <Route path="/blogs/:id" component={BlogDetails} />
+        <Route path="/blogs/:id" component={BlogPost} />
         <Route exact path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} />
         <Footer />

@@ -6,7 +6,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { Summary } from "../../styles/blog";
 
 type Props = {
-  id: number;
+  id: string;
   title: string;
   posted: string | Date;
   summary: string;
