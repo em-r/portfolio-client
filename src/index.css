@@ -14,6 +14,11 @@ body {
   /* color: #16d355; */
 }
 
+@font-face {
+  font-family: "Mosk";
+  src: local("Mosk"), url(./fonts/mosk-600.ttf) format("woff");
+}
+
 a {
   text-decoration: none;
   color: inherit;

@@ -9,7 +9,7 @@ export const Summary = styled.section`
         flex-direction: column;
         flex: 3;
         header {
-            margin: 0;
+            font-family: Mosk, sans-serif;
         }
         @media (min-width: 600px){
             padding: 0 10px;
