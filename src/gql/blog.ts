@@ -39,3 +39,22 @@ export const getBlogByRoute = gql`
         }
     }
 `;
+
+export const getBlogAssets = gql`
+   query blogAssets($id: String!){
+       blogPost(id: $id){
+           content {
+               links {
+                   assets {
+                       block {
+                           url
+                           sys {
+                               id
+                           }
+                       }
+                   }
+               }
+           }
+       }
+   } 
+`;

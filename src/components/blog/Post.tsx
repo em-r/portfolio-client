@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import {
+  documentToReactComponents,
+  Options,
+} from "@contentful/rich-text-react-renderer";
 import dayjs from "dayjs";
 import { Main } from "../../styles/Main";
-import { useQuery } from "@apollo/client";
-import { getBlogByRoute } from "../../gql/blog";
+import { useLazyQuery, useQuery } from "@apollo/client";
+import { getBlogAssets, getBlogByRoute } from "../../gql/blog";
+import { Block, Inline } from "@contentful/rich-text-types";
 
 interface BasePost {
   title: string;
@@ -30,17 +34,65 @@ interface PostData extends BasePost {
   };
 }
 
+interface Asset {
+  id: string;
+  url: string;
+}
+
+interface BlogPostAssetBlock {
+  url: string;
+  sys: {
+    id: string;
+  };
+}
+
+interface BlogPostAsset {
+  content: {
+    links: {
+      assets: {
+        block: BlogPostAssetBlock[];
+      };
+    };
+  };
+}
+
 const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
   match,
 }) => {
   const { routeId } = match.params;
   const [post, setPost] = useState<Post>();
   const [exists, setExists] = useState<boolean>(true);
+  const [assets, setAssets] = useState<Asset[]>([]);
   const { data, loading } = useQuery<{
     blogPostCollection: { items: PostData[] };
   }>(getBlogByRoute, {
     variables: { route: routeId },
   });
+  const [loadAssets, { data: assetsData }] = useLazyQuery<{
+    blogPost: BlogPostAsset;
+  }>(getBlogAssets);
+
+  const findAssetURL = (node: Block | Inline): string | null => {
+    const { data } = node;
+    const asset = assets.find(({ id }) => id === data.target.sys.id);
+    console.log("ASSET: ", asset);
+    if (!asset) return null;
+    return asset.url;
+  };
+
+  const renderOptions: Options = {
+    renderNode: {
+      "embedded-asset-block": (node) => {
+        const url = findAssetURL(node);
+        if (!url) return null;
+        return (
+          <div>
+            <img src={url} />
+          </div>
+        );
+      },
+    },
+  };
 
   useEffect(() => {
     document.title = "EMR - Blog";
@@ -57,15 +109,41 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
         return;
       }
       const blogPost = items[0];
-      console.log(blogPost);
       const {
         sys,
         content: { json },
         ...fields
       } = blogPost;
+
       setPost({ ...fields, ...sys, content: json });
     }
   }, [data, loading]);
+
+  useEffect(() => {
+    if (post) {
+      loadAssets({ variables: { id: post.id } });
+    }
+  }, [post]);
+
+  useEffect(() => {
+    if (assetsData && assetsData.blogPost) {
+      const { content } = assetsData.blogPost;
+      const { block } = content.links.assets;
+
+      if (!block) return;
+
+      const postAssets: Asset[] = [];
+      block.forEach((asset) => {
+        const {
+          sys: { id },
+          url,
+        } = asset;
+        postAssets.push({ id, url });
+      });
+
+      setAssets(postAssets);
+    }
+  }, [assetsData]);
 
   if (!loading && !exists) return <h2>NOT FOUND</h2>;
 
@@ -82,7 +160,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
           {dayjs(post!.firstPublishedAt).format("DD/MM/YYYY")}
         </span>
       </header>
-      {documentToReactComponents(post.content)}
+      {documentToReactComponents(post.content, renderOptions)}
       {/* </section> */}
     </Main>
   );
