@@ -28,7 +28,7 @@ const Wrapper: React.FC = () => {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/projects" component={Projects} />
-        <Route path="/blogs/:id" component={BlogPost} />
+        <Route path="/blogs/:routeId" component={BlogPost} />
         <Route exact path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} />
         <Footer />

@@ -1,46 +1,85 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import dayjs from "dayjs";
-import { useFetch } from "../../hooks";
 import { Main } from "../../styles/Main";
+import { useQuery } from "@apollo/client";
+import { getBlogByRoute } from "../../gql/blog";
 
-type Blog = {
-  id: number;
+interface BasePost {
   title: string;
-  body: string;
-  posted: string;
-};
+  readTime: number;
+  tags: string[];
+  github: string;
+  references: string[];
+}
 
-const BlogDetails: React.FC<RouteComponentProps<{ id: string }>> = ({
+interface Post extends BasePost {
+  id: string;
+  firstPublishedAt: number;
+  content: any;
+}
+
+interface PostData extends BasePost {
+  content: {
+    json: any;
+  };
+  sys: {
+    id: string;
+    firstPublishedAt: number;
+  };
+}
+
+const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
   match,
 }) => {
-  const { id } = match.params;
-  const [blog, setBlog] = useState<Blog>();
-  const fetchBlog = useFetch<{ blog: Blog }>("blog", { id: parseInt(id) });
+  const { routeId } = match.params;
+  const [post, setPost] = useState<Post>();
+  const [exists, setExists] = useState<boolean>(true);
+  const { data, loading } = useQuery<{
+    blogPostCollection: { items: PostData[] };
+  }>(getBlogByRoute, {
+    variables: { route: routeId },
+  });
 
   useEffect(() => {
     document.title = "EMR - Blog";
-    const blogDetails = async () => {
-      const details = await fetchBlog;
-      if (!details) return;
-      setBlog(details.blog);
-    };
-    blogDetails();
     // eslint-disable-next-line
   }, []);
 
-  if (!blog) return null;
+  useEffect(() => {
+    if (!loading && data) {
+      const {
+        blogPostCollection: { items },
+      } = data;
+      if (items.length === 0) {
+        setExists(false);
+        return;
+      }
+      const blogPost = items[0];
+      console.log(blogPost);
+      const {
+        sys,
+        content: { json },
+        ...fields
+      } = blogPost;
+      setPost({ ...fields, ...sys, content: json });
+    }
+  }, [data, loading]);
 
-  const { title, body, posted } = blog;
+  if (!loading && !exists) return <h2>NOT FOUND</h2>;
+
+  if (!post) return null;
 
   return (
     <Main width="800px">
       <section className="blog">
         <header>
-          <span>{title}</span>
-          <span className="date">{dayjs(posted).format("DD/MM/YYYY")}</span>
+          <span>{post.title}</span>
+          <span className="date">
+            {dayjs(post!.firstPublishedAt).format("DD/MM/YYYY")}
+          </span>
         </header>
-        <article>{body}</article>
+        {/* <article>{body}</article> */}
       </section>
     </Main>
   );
