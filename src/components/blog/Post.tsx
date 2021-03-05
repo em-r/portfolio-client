@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import dayjs from "dayjs";
 import { Main } from "../../styles/Main";
 import { useQuery } from "@apollo/client";
@@ -70,17 +71,19 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
 
   if (!post) return null;
 
+  // const Body = documentToReactComponents(post.content);
+
   return (
     <Main width="800px">
-      <section className="blog">
-        <header>
-          <span>{post.title}</span>
-          <span className="date">
-            {dayjs(post!.firstPublishedAt).format("DD/MM/YYYY")}
-          </span>
-        </header>
-        {/* <article>{body}</article> */}
-      </section>
+      {/* <section className="blog"> */}
+      <header>
+        <span>{post.title}</span>
+        <span className="date">
+          {dayjs(post!.firstPublishedAt).format("DD/MM/YYYY")}
+        </span>
+      </header>
+      {documentToReactComponents(post.content)}
+      {/* </section> */}
     </Main>
   );
 };
