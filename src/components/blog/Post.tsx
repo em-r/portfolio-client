@@ -75,7 +75,6 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
   const findAssetURL = (node: Block | Inline): string | null => {
     const { data } = node;
     const asset = assets.find(({ id }) => id === data.target.sys.id);
-    console.log("ASSET: ", asset);
     if (!asset) return null;
     return asset.url;
   };
@@ -87,7 +86,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
         if (!url) return null;
         return (
           <div>
-            <img src={url} />
+            <img src={url} alt="output" />
           </div>
         );
       },
@@ -123,6 +122,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
     if (post) {
       loadAssets({ variables: { id: post.id } });
     }
+    // eslint-disable-next-line
   }, [post]);
 
   useEffect(() => {
@@ -149,11 +149,8 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
 
   if (!post) return null;
 
-  // const Body = documentToReactComponents(post.content);
-
   return (
     <Main width="800px">
-      {/* <section className="blog"> */}
       <header>
         <span>{post.title}</span>
         <span className="date">
@@ -161,7 +158,6 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
         </span>
       </header>
       {documentToReactComponents(post.content, renderOptions)}
-      {/* </section> */}
     </Main>
   );
 };
