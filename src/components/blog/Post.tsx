@@ -5,56 +5,15 @@ import {
   Options,
 } from "@contentful/rich-text-react-renderer";
 import dayjs from "dayjs";
-import { Main } from "../../styles/Main";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { getBlogAssets, getBlogByRoute } from "../../gql/blog";
-import { Block, Inline } from "@contentful/rich-text-types";
-
-interface BasePost {
-  title: string;
-  readTime: number;
-  tags: string[];
-  github: string;
-  references: string[];
-}
-
-interface Post extends BasePost {
-  id: string;
-  firstPublishedAt: number;
-  content: any;
-}
-
-interface PostData extends BasePost {
-  content: {
-    json: any;
-  };
-  sys: {
-    id: string;
-    firstPublishedAt: number;
-  };
-}
-
-interface Asset {
-  id: string;
-  url: string;
-}
-
-interface BlogPostAssetBlock {
-  url: string;
-  sys: {
-    id: string;
-  };
-}
-
-interface BlogPostAsset {
-  content: {
-    links: {
-      assets: {
-        block: BlogPostAssetBlock[];
-      };
-    };
-  };
-}
+import { Main } from "../../styles/Main";
+import { Asset, BlogPostAsset, Post, PostData } from "./interfaces";
+import {
+  getAssetsFromPost,
+  getPostFromCollection,
+  findAssetURL,
+} from "./utils";
 
 const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
   match,
@@ -72,17 +31,10 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
     blogPost: BlogPostAsset;
   }>(getBlogAssets);
 
-  const findAssetURL = (node: Block | Inline): string | null => {
-    const { data } = node;
-    const asset = assets.find(({ id }) => id === data.target.sys.id);
-    if (!asset) return null;
-    return asset.url;
-  };
-
   const renderOptions: Options = {
     renderNode: {
       "embedded-asset-block": (node) => {
-        const url = findAssetURL(node);
+        const url = findAssetURL(assets, node);
         if (!url) return null;
         return (
           <div>
@@ -103,18 +55,12 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
       const {
         blogPostCollection: { items },
       } = data;
-      if (items.length === 0) {
+      const blogPost = getPostFromCollection(items, 0);
+      if (!blogPost) {
         setExists(false);
         return;
       }
-      const blogPost = items[0];
-      const {
-        sys,
-        content: { json },
-        ...fields
-      } = blogPost;
-
-      setPost({ ...fields, ...sys, content: json });
+      setPost(blogPost);
     }
   }, [data, loading]);
 
@@ -127,20 +73,8 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
 
   useEffect(() => {
     if (assetsData && assetsData.blogPost) {
-      const { content } = assetsData.blogPost;
-      const { block } = content.links.assets;
-
-      if (!block) return;
-
-      const postAssets: Asset[] = [];
-      block.forEach((asset) => {
-        const {
-          sys: { id },
-          url,
-        } = asset;
-        postAssets.push({ id, url });
-      });
-
+      const postAssets = getAssetsFromPost(assetsData.blogPost);
+      if (!postAssets) return;
       setAssets(postAssets);
     }
   }, [assetsData]);
