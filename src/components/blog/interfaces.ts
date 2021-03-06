@@ -1,4 +1,4 @@
-
+import { Document } from "@contentful/rich-text-types";
 
 export interface BasePost {
   title: string;
@@ -6,6 +6,7 @@ export interface BasePost {
   tags: string[];
   github: string;
   references: string[];
+  codeSnippetsTags: string[];
 }
 
 export interface Post extends BasePost {
@@ -44,4 +45,9 @@ export interface BlogPostAsset {
       };
     };
   };
+}
+
+export interface CodeSnippets {
+  id: string;
+  content: Document;
 }

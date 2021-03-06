@@ -4,16 +4,44 @@ import {
   documentToReactComponents,
   Options,
 } from "@contentful/rich-text-react-renderer";
+import { Document } from "@contentful/rich-text-types";
 import dayjs from "dayjs";
 import { useLazyQuery, useQuery } from "@apollo/client";
-import { getBlogAssets, getBlogByRoute } from "../../gql/blog";
+import { getBlogAssets, getBlogByRoute, getCodeSnippets } from "../../gql/blog";
 import { Main } from "../../styles/Main";
-import { Asset, BlogPostAsset, Post, PostData } from "./interfaces";
+import {
+  Asset,
+  BlogPostAsset,
+  CodeSnippets,
+  Post,
+  PostData,
+} from "./interfaces";
 import {
   getAssetsFromPost,
   getPostFromCollection,
   findAssetURL,
 } from "./utils";
+
+type BlogPostCollection = {
+  blogPostCollection: { items: PostData[] };
+};
+
+type BlogPostWithAssets = {
+  blogPost: BlogPostAsset;
+};
+
+type BlogPostSnippetsItems = {
+  sys: {
+    id: string;
+  };
+  snippets: {
+    json: Document;
+  };
+};
+
+type BlogPostsWithCode = {
+  codeBlockCollection: { items: BlogPostSnippetsItems[] };
+};
 
 const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
   match,
@@ -22,14 +50,19 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
   const [post, setPost] = useState<Post>();
   const [exists, setExists] = useState<boolean>(true);
   const [assets, setAssets] = useState<Asset[]>([]);
-  const { data, loading } = useQuery<{
-    blogPostCollection: { items: PostData[] };
-  }>(getBlogByRoute, {
+  const [snippets, setSnippets] = useState<CodeSnippets[]>([]);
+
+  const { data, loading } = useQuery<BlogPostCollection>(getBlogByRoute, {
     variables: { route: routeId },
   });
-  const [loadAssets, { data: assetsData }] = useLazyQuery<{
-    blogPost: BlogPostAsset;
-  }>(getBlogAssets);
+
+  const [loadAssets, { data: assetsData }] = useLazyQuery<BlogPostWithAssets>(
+    getBlogAssets
+  );
+  const [
+    loadSnippets,
+    { data: snippetsData },
+  ] = useLazyQuery<BlogPostsWithCode>(getCodeSnippets);
 
   const renderOptions: Options = {
     renderNode: {
@@ -41,6 +74,13 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
             <img src={url} alt="output" />
           </div>
         );
+      },
+      "embedded-entry-block": (node) => {
+        const snippet = snippets.find(
+          ({ id }) => node.data.target.sys.id === id
+        );
+        if (!snippet) return null;
+        return <pre>{documentToReactComponents(snippet.content)}</pre>;
       },
     },
   };
@@ -67,6 +107,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
   useEffect(() => {
     if (post) {
       loadAssets({ variables: { id: post.id } });
+      loadSnippets({ variables: { tags: post.codeSnippetsTags } });
     }
     // eslint-disable-next-line
   }, [post]);
@@ -78,6 +119,25 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
       setAssets(postAssets);
     }
   }, [assetsData]);
+
+  useEffect(() => {
+    if (!snippetsData || !snippetsData.codeBlockCollection) return;
+
+    const { items } = snippetsData.codeBlockCollection;
+
+    if (!items.length) return;
+
+    const postSnippets: CodeSnippets[] = [];
+    items.forEach(({ snippets, sys }) => {
+      if (snippets) {
+        const { id } = sys;
+        const { json } = snippets;
+        postSnippets.push({ id, content: json });
+      }
+    });
+
+    setSnippets(postSnippets);
+  }, [snippetsData]);
 
   if (!loading && !exists) return <h2>NOT FOUND</h2>;
 

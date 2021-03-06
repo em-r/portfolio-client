@@ -25,12 +25,13 @@ export const getBlogByRoute = gql`
             items {
                 title
                 readTime
-                content {
-                    json
-                }
                 tags
                 github
                 references
+                codeSnippetsTags
+                content {
+                    json
+                }
                 sys {
                     id
                     firstPublishedAt
@@ -57,4 +58,20 @@ export const getBlogAssets = gql`
            }
        }
    } 
+`;
+
+export const getCodeSnippets = gql`
+    query snippets($tags: [String!]){
+        codeBlockCollection(where: { snippetTag_in: $tags }){
+            total
+            items {
+                snippets {
+                    json
+                }
+                sys {
+                    id
+                }
+            }
+        }
+    }
 `;
