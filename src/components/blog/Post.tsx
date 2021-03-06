@@ -4,9 +4,11 @@ import {
   documentToReactComponents,
   Options,
 } from "@contentful/rich-text-react-renderer";
+import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import { Document } from "@contentful/rich-text-types";
 import dayjs from "dayjs";
 import { useLazyQuery, useQuery } from "@apollo/client";
+import Highlighter from "react-syntax-highlighter";
 import { getBlogAssets, getBlogByRoute, getCodeSnippets } from "../../gql/blog";
 import { Main } from "../../styles/Main";
 import {
@@ -21,6 +23,7 @@ import {
   getPostFromCollection,
   findAssetURL,
 } from "./utils";
+import { monokai } from "./highlighter";
 
 type BlogPostCollection = {
   blogPostCollection: { items: PostData[] };
@@ -80,7 +83,11 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
           ({ id }) => node.data.target.sys.id === id
         );
         if (!snippet) return null;
-        return <pre>{documentToReactComponents(snippet.content)}</pre>;
+        return (
+          <Highlighter style={monokai}>
+            {documentToPlainTextString(snippet.content)}
+          </Highlighter>
+        );
       },
     },
   };
