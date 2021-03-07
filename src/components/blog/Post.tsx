@@ -23,7 +23,7 @@ import {
   getPostFromCollection,
   findAssetURL,
 } from "./utils";
-import { monokai } from "./highlighter";
+import highlighter from "../../styles/highlighter";
 import { themeContext } from "../../store/themeContext";
 
 type BlogPostCollection = {
@@ -88,7 +88,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
         );
         if (!snippet) return null;
         return (
-          <Highlighter style={monokai}>
+          <Highlighter style={highlighter[theme]}>
             {documentToPlainTextString(snippet.content)}
           </Highlighter>
         );
