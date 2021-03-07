@@ -1,13 +1,7 @@
 import React, { createContext, useReducer } from "react";
+import { State, ContextType, Action, ProviderProps } from "./types";
 
-type ContextType = {
-  themeState: {
-    menuToggle: boolean;
-    theme: string;
-  };
-  dispatch: React.Dispatch<{ type: "MENU_ACTION" | "THEME_ACTION" }>;
-};
-const initState = {
+const initState: State = {
   menuToggle: false,
   theme: "light",
 };
@@ -17,11 +11,7 @@ export const themeContext = createContext<ContextType>({
   dispatch: () => {},
 });
 
-const themeReducer = (
-  state: typeof initState,
-  action: { type: "MENU_ACTION" | "THEME_ACTION" }
-) => {
-  // console.log(action, state);
+const themeReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "MENU_ACTION":
       return { ...state, menuToggle: !state.menuToggle };
@@ -33,9 +23,7 @@ const themeReducer = (
   }
 };
 
-const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+const ThemeContextProvider: React.FC<ProviderProps> = ({ children }) => {
   const [themeState, dispatch] = useReducer(themeReducer, initState);
   return (
     <themeContext.Provider value={{ themeState, dispatch }}>

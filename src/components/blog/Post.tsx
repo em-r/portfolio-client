@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 import {
   documentToReactComponents,
@@ -24,6 +24,7 @@ import {
   findAssetURL,
 } from "./utils";
 import { monokai } from "./highlighter";
+import { themeContext } from "../../store/themeContext";
 
 type BlogPostCollection = {
   blogPostCollection: { items: PostData[] };
@@ -54,6 +55,9 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
   const [exists, setExists] = useState<boolean>(true);
   const [assets, setAssets] = useState<Asset[]>([]);
   const [snippets, setSnippets] = useState<CodeSnippets[]>([]);
+  const {
+    themeState: { theme },
+  } = useContext(themeContext);
 
   const { data, loading } = useQuery<BlogPostCollection>(getBlogByRoute, {
     variables: { route: routeId },
@@ -90,13 +94,12 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
         );
       },
       [INLINES.HYPERLINK]: (node: any) => {
-        // console.log();
         if (!node || !node.data) return null;
         const { uri } = node.data;
         if (uri.startsWith(window.origin)) {
           const href = (uri as string).replace(window.origin, "");
           return (
-            <Link className="link" to={`/${href}`}>
+            <Link className={`link-${theme}-mode`} to={`/${href}`}>
               {node.content[0].value}
             </Link>
           );
@@ -104,7 +107,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
         return (
           <a
             href={uri}
-            className="link"
+            className={`link-${theme}-mode`}
             target="_blank"
             rel="noopener noreferrer"
           >

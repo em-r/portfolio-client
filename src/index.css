@@ -63,6 +63,12 @@ footer .mobile div {
   }
 }
 
-.link {
+.link-dark-mode {
   color: #61dafb;
+  font-weight: bold;
+}
+
+.link-light-mode {
+  color: #4946ec;
+  font-weight: bold;
 }
