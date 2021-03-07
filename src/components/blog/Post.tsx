@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import {
   documentToReactComponents,
   Options,
 } from "@contentful/rich-text-react-renderer";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
-import { Document } from "@contentful/rich-text-types";
+import { Document, INLINES } from "@contentful/rich-text-types";
 import dayjs from "dayjs";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import Highlighter from "react-syntax-highlighter";
@@ -87,6 +87,29 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
           <Highlighter style={monokai}>
             {documentToPlainTextString(snippet.content)}
           </Highlighter>
+        );
+      },
+      [INLINES.HYPERLINK]: (node: any) => {
+        // console.log();
+        if (!node || !node.data) return null;
+        const { uri } = node.data;
+        if (uri.startsWith(window.origin)) {
+          const href = (uri as string).replace(window.origin, "");
+          return (
+            <Link className="link" to={`/${href}`}>
+              {node.content[0].value}
+            </Link>
+          );
+        }
+        return (
+          <a
+            href={uri}
+            className="link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {node.content[0].value}
+          </a>
         );
       },
     },
