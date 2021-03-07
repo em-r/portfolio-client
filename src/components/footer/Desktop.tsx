@@ -13,7 +13,7 @@ const items = [
   {
     id: 2,
     icon: <FaLinkedin size="2em" />,
-    link: "https://www.linkedin.com/in/el-mehdi-rami-78bb6a182/",
+    link: "https://www.linkedin.com/in/el-mehdi-rami/",
   },
   {
     id: 3,
