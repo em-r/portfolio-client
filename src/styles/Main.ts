@@ -11,22 +11,12 @@ export const Main = styled.main<{ width?: string }>`
   > * {
     flex: 1;
   }
-  > section {
-    margin-bottom: 20px;
-  }
   header {
     font-size: 1.5rem;
     margin-bottom: 30px;
   }
   section header {
     font-size: 1.8rem;
-  }
-  section  div {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 90%;
-    margin: 0 auto;
   }
   .skill p {
     font-size: 1.1rem;
