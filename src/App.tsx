@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import ThemeContextProvider from "./store/themeContext";
+import globalContextProvider from "./store/globalContext";
 import { useFetch } from "./hooks";
 import Wrapper from "./components/Wrapper";
 
@@ -25,11 +25,11 @@ const App: React.FC = () => {
     // eslint-disable-next-line
   }, []);
   return (
-    <ThemeContextProvider>
+    <globalContextProvider>
       <ApolloProvider client={client}>
         <Wrapper />
       </ApolloProvider>
-    </ThemeContextProvider>
+    </globalContextProvider>
   );
 };
 

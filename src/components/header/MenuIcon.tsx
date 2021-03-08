@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { MenuLogo } from "../../styles/Header";
-import { themeContext } from "../../store/themeContext";
+import { globalContext } from "../../store/globalContext";
 
 const MenuIcon: React.FC = () => {
-  const { themeState, dispatch } = useContext(themeContext);
+  const { globalState, dispatch } = useContext(globalContext);
   return (
     <MenuLogo
       onClick={() => dispatch({ type: "MENU_ACTION" })}
-      isOpen={themeState.menuToggle}
+      isOpen={globalState.menuToggle}
     >
       <div />
       <div />

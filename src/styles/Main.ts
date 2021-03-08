@@ -8,9 +8,6 @@ export const Main = styled.main<{ width?: string }>`
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;
-  > * {
-    flex: 1;
-  }
   header {
     font-size: 1.5rem;
     margin-bottom: 30px;

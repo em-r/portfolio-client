@@ -6,8 +6,8 @@ const initState: State = {
   theme: "light",
 };
 
-export const themeContext = createContext<ContextType>({
-  themeState: initState,
+export const globalContext = createContext<ContextType>({
+  globalState: initState,
   dispatch: () => {},
 });
 
@@ -23,13 +23,13 @@ const themeReducer = (state: State, action: Action): State => {
   }
 };
 
-const ThemeContextProvider: React.FC<ProviderProps> = ({ children }) => {
-  const [themeState, dispatch] = useReducer(themeReducer, initState);
+const GlobalContextProvider: React.FC<ProviderProps> = ({ children }) => {
+  const [globalState, dispatch] = useReducer(themeReducer, initState);
   return (
-    <themeContext.Provider value={{ themeState, dispatch }}>
+    <globalContext.Provider value={{ globalState, dispatch }}>
       {children}
-    </themeContext.Provider>
+    </globalContext.Provider>
   );
 };
 
-export default ThemeContextProvider;
+export default GlobalContextProvider;

@@ -24,7 +24,7 @@ import {
   findAssetURL,
 } from "./utils";
 import highlighter from "../../styles/highlighter";
-import { themeContext } from "../../store/themeContext";
+import { globalContext } from "../../store/globalContext";
 
 type BlogPostCollection = {
   blogPostCollection: { items: PostData[] };
@@ -56,8 +56,8 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
   const [assets, setAssets] = useState<Asset[]>([]);
   const [snippets, setSnippets] = useState<CodeSnippets[]>([]);
   const {
-    themeState: { theme },
-  } = useContext(themeContext);
+    globalState: { theme },
+  } = useContext(globalContext);
 
   const { data, loading } = useQuery<BlogPostCollection>(getBlogByRoute, {
     variables: { route: routeId },

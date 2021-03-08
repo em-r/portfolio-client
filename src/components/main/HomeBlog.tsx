@@ -6,7 +6,9 @@ import Blog from "../blog/Blog";
 const Home: React.FC = () => (
   <Main width="800px">
     <Blog />
-    <Link to="/blog">Read more</Link>
+    <Link to="/blog" style={{ textAlign: "center" }}>
+      Read more
+    </Link>
   </Main>
 );
 

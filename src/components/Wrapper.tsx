@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { Route } from "react-router-dom";
-import { themeContext } from "../store/themeContext";
+import { globalContext } from "../store/globalContext";
 import { WrapperComp } from "../styles/Main";
 import Header from "./header/Header";
 // import Home from "./main/Home";
@@ -16,13 +16,14 @@ import { lightTheme, darkTheme } from "../styles/Themes";
 import HomeBlog from "./main/HomeBlog";
 
 const Wrapper: React.FC = () => {
-  const { themeState } = useContext(themeContext);
+  const { globalState } = useContext(globalContext);
   const [theme, setTheme] = useState(darkTheme);
 
   useEffect(() => {
-    const switchedTheme = themeState.theme === "light" ? lightTheme : darkTheme;
+    const switchedTheme =
+      globalState.theme === "light" ? lightTheme : darkTheme;
     setTheme(switchedTheme);
-  }, [theme, themeState]);
+  }, [theme, globalState]);
   return (
     <ThemeProvider theme={theme}>
       <WrapperComp>

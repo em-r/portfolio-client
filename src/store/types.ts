@@ -5,7 +5,7 @@ export type State = {
 }
 
 export type ContextType = {
-  themeState: State;
+  globalState: State;
   dispatch: React.Dispatch<{ type: "MENU_ACTION" | "THEME_ACTION" }>;
 };
 
