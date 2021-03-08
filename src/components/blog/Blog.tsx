@@ -1,8 +1,14 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useContext,
+} from "react";
 import { useQuery } from "@apollo/client";
 import BlogSummary from "./Summary";
-import { Main } from "../../styles/Main";
 import { getBlogs } from "../../gql/blog";
+import { globalContext } from "../../store/globalContext";
 
 type Post = {
   id: string;
@@ -38,6 +44,7 @@ const Blog: React.FC = () => {
   const { data } = useQuery<{
     blogPostCollection: BlogPostCollection;
   }>(getBlogs);
+  const { dispatch } = useContext(globalContext);
 
   const observer = useRef<any>();
   const lastPostRef = useCallback(
@@ -84,6 +91,7 @@ const Blog: React.FC = () => {
       setPosts(blogPosts.slice(0, perPage));
       setAllPosts(blogPosts);
       setTotal(total);
+      dispatch({ type: "BLOGS_LOADED" });
     }
     // eslint-disable-next-line
   }, [data]);

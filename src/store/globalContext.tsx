@@ -4,6 +4,7 @@ import { State, ContextType, Action, ProviderProps } from "./types";
 const initState: State = {
   menuToggle: false,
   theme: "light",
+  blogsLoaded: false,
 };
 
 export const globalContext = createContext<ContextType>({
@@ -18,6 +19,8 @@ const themeReducer = (state: State, action: Action): State => {
     case "THEME_ACTION":
       const theme = state.theme === "dark" ? "light" : "dark";
       return { ...state, theme };
+    case "BLOGS_LOADED":
+      return { ...state, blogsLoaded: true };
     default:
       return state;
   }
