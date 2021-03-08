@@ -91,19 +91,15 @@ const Blog: React.FC = () => {
   useEffect(() => setTotal(allPosts.length - posts.length), [allPosts, posts]);
 
   return (
-    <Main width="800px">
-      <section className="blogs">
-        {posts &&
-          posts.map((post, index) => {
-            if (posts.length === index + 1) {
-              return (
-                <BlogSummary {...post} key={post.id} myRef={lastPostRef} />
-              );
-            }
-            return <BlogSummary {...post} key={post.id} />;
-          })}
-      </section>
-    </Main>
+    <section className="blogs">
+      {posts &&
+        posts.map((post, index) => {
+          if (posts.length === index + 1) {
+            return <BlogSummary {...post} key={post.id} myRef={lastPostRef} />;
+          }
+          return <BlogSummary {...post} key={post.id} />;
+        })}
+    </section>
   );
 };
 
