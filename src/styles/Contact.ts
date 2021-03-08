@@ -41,3 +41,24 @@ export const ContactForm = styled.form`
     cursor: pointer;
   }
 `;
+
+export const ContactHeader = styled.div`
+  flex: 0;
+  h2 {
+    font-family: "Thasadith";
+    text-align: center;
+  }
+  a {
+    color: ${({ theme }) => theme.color_anchor};
+  }
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .split {
+    height: 2px;
+    background: ${({ theme }) => theme.color_primary};
+    flex: 1;
+  }
+`;

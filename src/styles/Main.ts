@@ -21,7 +21,6 @@ export const Main = styled.main<{ width?: string }>`
   section header {
     font-size: 1.8rem;
   }
-  /* section > div { */
   section  div {
     display: flex;
     flex-direction: column;
@@ -58,26 +57,6 @@ export const Main = styled.main<{ width?: string }>`
     }
     img {
       width: 100%;
-    }
-  }
-  .contact-heading {
-    flex: 0;
-    h2 {
-      font-family: "Thasadith";
-      text-align: center;
-    }
-    a {
-      color: ${({ theme }) => theme.color_anchor};
-    }
-    > div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .split {
-      height: 2px;
-      background: ${({ theme }) => theme.color_primary};
-      flex: 1;
     }
   }
 `;
