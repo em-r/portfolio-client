@@ -60,23 +60,6 @@ export const Main = styled.main<{ width?: string }>`
       width: 100%;
     }
   }
-  .blog header {
-    display: flex;
-    a {
-      color: ${({ theme }) => theme.color_anchor};
-    }
-    .date {
-      margin-left: auto;
-      font-size: 0.9rem;
-      align-self: flex-end;
-    }
-    .blog-meta-data {
-      margin-left: auto;
-      font-size: 0.9rem;
-      display: flex;
-      flex-direction: column;
-    }
-  }
   .contact-heading {
     flex: 0;
     h2 {
@@ -96,34 +79,6 @@ export const Main = styled.main<{ width?: string }>`
       background: ${({ theme }) => theme.color_primary};
       flex: 1;
     }
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-  }
-  form > * {
-    display: block;
-    width: 100%;
-    border: 1px solid ${({ theme }) => theme.color_primary};
-    border-radius: 5px;
-    padding: 10px;
-  }
-  form input {
-    font-size: 2rem;
-  }
-  form textarea {
-    resize: vertical;
-    min-height: 200px;
-    font-size: 1.7rem;
-  }
-  form button {
-    background: #0555ea;
-    color: #fff;
-    border: 1px solid #fff;
-    font-size: 1.5rem;
-    cursor: pointer;
   }
 `;
 

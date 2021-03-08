@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Success from "./Success";
 import Error from "./Error";
 import { usePost } from "../../hooks";
+import { ContactForm } from "../../styles/Contact";
 
 const Form: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -30,7 +31,7 @@ const Form: React.FC = () => {
   return (
     <>
       {error && errorMessage && <Error message={errorMessage} />}
-      <form onSubmit={useSumbit}>
+      <ContactForm onSubmit={useSumbit}>
         <input
           type="email"
           placeholder="Email Address"
@@ -47,7 +48,7 @@ const Form: React.FC = () => {
           }
         />
         <button type="submit">Send</button>
-      </form>
+      </ContactForm>
     </>
   );
 };
