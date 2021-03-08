@@ -88,7 +88,7 @@ export const Nav = styled.nav<{ isOpen: boolean }>`
     position: revert;
     height: revert;
     max-width: 800px;
-    display: inline;
+    display: flex;
     color: ${({ theme }) => theme.color_primary};
     flex: 1;
     padding: 10px 0;
@@ -105,13 +105,15 @@ export const NavMenu = styled.div`
   font-size: 2em;
   gap: 25px;
   margin: 80px auto;
+  flex: 1;
   @media (min-width: 800px) {
+    flex: unset;
+    width: 90%;
     max-width: 600px;
     flex-direction: row;
     font-size: 1.1em;
     gap: 0;
     margin: 20px auto;
-    padding-bottom: 20px;
     border-bottom: 1px solid ${({ theme }) => theme.bg_secondary};
   }
 `;
