@@ -30,7 +30,7 @@ export const ContactForm = styled.form`
   }
   textarea {
     resize: vertical;
-    min-height: 200px;
+    height: 150px;
     font-size: 1.7rem;
   }
   button {

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Main = styled.main<{ width?: string }>`
   width: 80%;
-  min-height: 90vh;
   max-width: ${({ width }) => (width ? width : "500px")};
   margin: 10px auto;
   margin-bottom: 50px;
@@ -23,6 +22,9 @@ export const Main = styled.main<{ width?: string }>`
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+  .projects {
+    padding-bottom: 30px;
   }
   .project,
   .blog {
@@ -104,7 +106,9 @@ export const SFooter = styled.div`
 
 export const WrapperComp = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: ${({ theme }) => theme.bg_primary};
   color: ${({ theme }) => theme.color_primary};
 `;
