@@ -6,9 +6,6 @@ export default styled.header`
   font-family: "Segoe UI";
   font-weight: "bold";
   position: relative;
-  /* @media (min-width: 650px) {
-    justify-content: space-between;
-  } */
   > div {
     display: flex;
     justify-content: space-between;
@@ -17,10 +14,6 @@ export default styled.header`
     box-sizing: border-box;
     max-width: 90%;
     margin: 0 auto;
-    /* gap:  */
-    /* @media (min-width: 700px) {
-      justify-content: space-around;
-    } */
   }
 `;
 
@@ -28,8 +21,7 @@ export const SiteLogo = styled.h1`
   margin-top: 30px;
   text-align: center;
   align-self: center;
-  /* color: ${({ theme }) => theme.color_primary}; */
-  /* color: #0555ea; */
+  font-family: Jenthill;
 `;
 
 export const MenuLogo = styled.div<{ isOpen: boolean }>`

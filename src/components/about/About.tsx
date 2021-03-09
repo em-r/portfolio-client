@@ -6,14 +6,22 @@ type Skill = {
   title: string;
   stack: string[];
 };
-const RenderSkill: React.FC<{ skill: Skill }> = ({ skill }) => {
+
+const emojis = ["👨🏻‍💻", "🚀", "✨", "💾", "🔗", "🐳"];
+
+type Props = {
+  skill: Skill;
+  emoji: string;
+};
+
+const RenderSkill: React.FC<Props> = ({ skill, emoji }) => {
   const { title, stack } = skill;
 
   return (
     <div className="skill">
       <h3>
         <span role="img" aria-label="arrow">
-          ➡️
+          {emoji}
         </span>{" "}
         {title}
       </h3>
@@ -40,17 +48,21 @@ const About: React.FC = () => {
       <header>
         Hey{" "}
         <span role="img" aria-label="waving">
-          👋
+          👋🏻
         </span>
         , my name is Mehdi, I'm a software developer with a mechanical
         engineering background.
       </header>
       <section>
         <header>Technical Skills:</header>
-        <div>
+        <div style={{ width: "100%", maxWidth: 600, margin: "0 auto" }}>
           {skills &&
-            skills.map((skill) => (
-              <RenderSkill skill={skill} key={skill.title} />
+            skills.map((skill, idx) => (
+              <RenderSkill
+                skill={skill}
+                key={skill.title}
+                emoji={emojis[idx]}
+              />
             ))}
         </div>
       </section>

@@ -19,6 +19,11 @@ body {
   src: local("Mosk"), url(./fonts/mosk-600.ttf) format("woff");
 }
 
+@font-face {
+  font-family: "Jenthill";
+  src: local("Jenthill"), url(./fonts/jenthill.woff) format("woff");
+}
+
 a {
   text-decoration: none;
   color: inherit;
