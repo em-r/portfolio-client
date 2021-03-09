@@ -15,6 +15,17 @@ import Footer from "./footer/Footer";
 import { lightTheme, darkTheme } from "../styles/Themes";
 import HomeBlog from "./main/HomeBlog";
 
+const Routes: React.FC = () => (
+  <React.Fragment>
+    <Route exact path="/" component={HomeBlog} />
+    <Route path="/about" component={About} />
+    <Route path="/projects" component={Projects} />
+    <Route path="/blogs/:routeId" component={BlogPost} />
+    <Route exact path="/blog" component={BlogWrapper} />
+    <Route path="/contact" component={Contact} />
+  </React.Fragment>
+);
+
 const Wrapper: React.FC = () => {
   const { globalState } = useContext(globalContext);
   const [theme, setTheme] = useState(darkTheme);
@@ -28,16 +39,7 @@ const Wrapper: React.FC = () => {
     <ThemeProvider theme={theme}>
       <WrapperComp>
         <Header />
-        {!globalState.menuToggle && (
-          <React.Fragment>
-            <Route exact path="/" component={HomeBlog} />
-            <Route path="/about" component={About} />
-            <Route path="/projects" component={Projects} />
-            <Route path="/blogs/:routeId" component={BlogPost} />
-            <Route exact path="/blog" component={BlogWrapper} />
-            <Route path="/contact" component={Contact} />
-          </React.Fragment>
-        )}
+        <Routes />
         <Footer />
       </WrapperComp>
     </ThemeProvider>

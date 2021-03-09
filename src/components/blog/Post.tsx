@@ -56,7 +56,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
   const [assets, setAssets] = useState<Asset[]>([]);
   const [snippets, setSnippets] = useState<CodeSnippets[]>([]);
   const {
-    globalState: { theme },
+    globalState: { theme, menuToggle },
   } = useContext(globalContext);
 
   const { data, loading } = useQuery<BlogPostCollection>(getBlogByRoute, {
@@ -177,7 +177,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
   if (!post) return null;
 
   return (
-    <Main width="800px">
+    <Main width="800px" isHidden={menuToggle}>
       <header>
         <span>{post.title}</span>
         <span className="date">

@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
-export const Main = styled.main<{ width?: string }>`
+export const Main = styled.main<{ width?: string, isHidden?: boolean }>`
   width: 80%;
   max-width: ${({ width }) => (width ? width : "500px")};
   margin: 10px auto;
   margin-bottom: 50px;
-  display: flex;
+  display: ${({isHidden}) => isHidden ? "none": "flex"};
   flex-direction: column;
+  @media (min-width: 800px) {
+    display: flex;
+  }
   header {
     font-size: 1.5rem;
     margin-bottom: 30px;

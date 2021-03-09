@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Main } from "../../styles/Main";
 import ProjectSummary from "./Summary";
 import { useFetch } from "../../hooks";
+import { globalContext } from "../../store/globalContext";
 
 type Project = {
   name: string;
@@ -14,6 +15,9 @@ type Project = {
 const Projects: React.FC = () => {
   const [projects, setProjects] = useState<Project[] | null>(null);
   const fetchProjects = useFetch<{ projects: Project[] }>("projects");
+  const {
+    globalState: { menuToggle },
+  } = useContext(globalContext);
 
   useEffect(() => {
     document.title = "EMR - Projects";
@@ -27,7 +31,7 @@ const Projects: React.FC = () => {
   }, []);
 
   return (
-    <Main width="1000px">
+    <Main width="1000px" isHidden={menuToggle}>
       <header>Some of my work</header>
       <section className="projects">
         {projects &&

@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Main } from "../../styles/Main";
 import { useFetch } from "../../hooks";
+import { globalContext } from "../../store/globalContext";
 
 type Skill = {
   title: string;
   stack: string[];
 };
-
-const emojis = ["👨🏻‍💻", "🚀", "✨", "💾", "🔗", "🐳"];
 
 type Props = {
   skill: Skill;
@@ -33,6 +32,11 @@ const RenderSkill: React.FC<Props> = ({ skill, emoji }) => {
 const About: React.FC = () => {
   const [skills, setSkills] = useState<Skill[] | null>(null);
   const fetchSkills = useFetch<{ skills: Skill[] }>("skills");
+  const {
+    globalState: { menuToggle },
+  } = useContext(globalContext);
+
+  const emojis = ["👨🏻‍💻", "🚀", "✨", "💾", "🔗", "🐳"];
   useEffect(() => {
     document.title = "EMR - About";
     const skillsList = async () => {
@@ -44,7 +48,7 @@ const About: React.FC = () => {
     // eslint-disable-next-line
   }, []);
   return (
-    <Main width="800px">
+    <Main width="800px" isHidden={menuToggle}>
       <header>
         Hey{" "}
         <span role="img" aria-label="waving">

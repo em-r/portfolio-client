@@ -62,6 +62,7 @@ export const MenuLogo = styled.div<{ isOpen: boolean }>`
 `;
 
 export const Nav = styled.nav<{ isOpen: boolean }>`
+  display: ${({isOpen}) => isOpen ? "block" : "none" };
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
   transition: all 0.5s linear;
@@ -69,6 +70,7 @@ export const Nav = styled.nav<{ isOpen: boolean }>`
   top: 0;
   left: 0;
   width: 100vw;
+  height: 80vh;
   background-color: ${({ theme }) => theme.bg_primary};
   color: ${({ theme }) => theme.color_primary};
   padding: 40px 0;
@@ -77,6 +79,7 @@ export const Nav = styled.nav<{ isOpen: boolean }>`
     transition: none;
     opacity: 1;
     position: revert;
+    height: revert;
     max-width: 800px;
     display: flex;
     color: ${({ theme }) => theme.color_primary};
