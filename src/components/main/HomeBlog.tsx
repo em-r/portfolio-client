@@ -1,8 +1,19 @@
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
+import styled from "styled-components";
 import { globalContext } from "../../store/globalContext";
 import { Main } from "../../styles/Main";
 import Blog from "../blog/Blog";
+
+const Button = styled.button`
+  background: #0555ea;
+  color: #fff;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+`;
 
 const Home: React.FC = () => {
   const {
@@ -18,7 +29,7 @@ const Home: React.FC = () => {
       <Blog />
       {blogsLoaded && (
         <p style={{ textAlign: "center" }}>
-          <button onClick={() => setRedirect(!redirect)}>Read more</button>
+          <Button onClick={() => setRedirect(!redirect)}>Browse Posts</Button>
         </p>
       )}
     </Main>

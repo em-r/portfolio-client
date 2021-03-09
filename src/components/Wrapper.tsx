@@ -28,12 +28,16 @@ const Wrapper: React.FC = () => {
     <ThemeProvider theme={theme}>
       <WrapperComp>
         <Header />
-        <Route exact path="/" component={HomeBlog} />
-        <Route path="/about" component={About} />
-        <Route path="/projects" component={Projects} />
-        <Route path="/blogs/:routeId" component={BlogPost} />
-        <Route exact path="/blog" component={BlogWrapper} />
-        <Route path="/contact" component={Contact} />
+        {!globalState.menuToggle && (
+          <React.Fragment>
+            <Route exact path="/" component={HomeBlog} />
+            <Route path="/about" component={About} />
+            <Route path="/projects" component={Projects} />
+            <Route path="/blogs/:routeId" component={BlogPost} />
+            <Route exact path="/blog" component={BlogWrapper} />
+            <Route path="/contact" component={Contact} />
+          </React.Fragment>
+        )}
         <Footer />
       </WrapperComp>
     </ThemeProvider>

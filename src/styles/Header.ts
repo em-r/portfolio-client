@@ -69,7 +69,6 @@ export const Nav = styled.nav<{ isOpen: boolean }>`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
   background-color: ${({ theme }) => theme.bg_primary};
   color: ${({ theme }) => theme.color_primary};
   padding: 40px 0;
@@ -78,7 +77,6 @@ export const Nav = styled.nav<{ isOpen: boolean }>`
     transition: none;
     opacity: 1;
     position: revert;
-    height: revert;
     max-width: 800px;
     display: flex;
     color: ${({ theme }) => theme.color_primary};
