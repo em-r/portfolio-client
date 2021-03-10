@@ -16,6 +16,7 @@ export interface Post extends BasePost {
 }
 
 export interface PostData extends BasePost {
+  github: string;
   content: {
     json: any;
   };

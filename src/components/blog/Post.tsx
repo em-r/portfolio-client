@@ -25,6 +25,7 @@ import {
 } from "./utils";
 import highlighter from "../../styles/highlighter";
 import { globalContext } from "../../store/globalContext";
+import { FaGithub } from "react-icons/fa";
 
 type BlogPostCollection = {
   blogPostCollection: { items: PostData[] };
@@ -179,11 +180,24 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
 
   return (
     <Main width="800px" isHidden={menuToggle}>
-      <header>
-        <span>{post.title}</span>
-        <span className="date">
-          {dayjs(post!.firstPublishedAt).format("DD/MM/YYYY")}
-        </span>
+      <header style={{ display: "flex" }}>
+        <span style={{ flex: 3 }}>{post.title}</span>
+        <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+          {post.github && (
+            <a
+              href={post.github}
+              style={{ display: "flex", alignItems: "center", gap: 5 }}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub />
+              <span>Repo</span>
+            </a>
+          )}
+          <small className="date">
+            {dayjs(post!.firstPublishedAt).format("DD/MM/YYYY")}
+          </small>
+        </div>
       </header>
       {documentToReactComponents(post.content, renderOptions)}
     </Main>
