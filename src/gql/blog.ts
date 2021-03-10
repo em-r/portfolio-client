@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const getBlogs = gql`
     query {
-        blogPostCollection(order: [sys_publishedAt_ASC]) {
+        blogPostCollection(order: [sys_publishedAt_DESC]) {
             total
             items {
                 routeId

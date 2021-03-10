@@ -101,7 +101,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
         if (uri.startsWith(window.origin)) {
           const href = (uri as string).replace(window.origin, "");
           return (
-            <Link className={`link-${theme}-mode`} to={`/${href}`}>
+            <Link className={`link-${theme}-mode`} to={href}>
               {node.content[0].value}
             </Link>
           );
