@@ -35,6 +35,7 @@ type BlogPostWithAssets = {
 };
 
 type BlogPostSnippetsItems = {
+  language: string;
   sys: {
     id: string;
   };
@@ -88,7 +89,7 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
         );
         if (!snippet) return null;
         return (
-          <Highlighter style={highlighter[theme]}>
+          <Highlighter style={highlighter[theme]} language={snippet.language}>
             {documentToPlainTextString(snippet.content)}
           </Highlighter>
         );
@@ -161,11 +162,11 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
     if (!items.length) return;
 
     const postSnippets: CodeSnippets[] = [];
-    items.forEach(({ snippets, sys }) => {
+    items.forEach(({ snippets, sys, language }) => {
       if (snippets) {
         const { id } = sys;
         const { json } = snippets;
-        postSnippets.push({ id, content: json });
+        postSnippets.push({ id, content: json, language });
       }
     });
 

@@ -50,4 +50,5 @@ export interface BlogPostAsset {
 export interface CodeSnippets {
   id: string;
   content: Document;
+  language: string;
 }

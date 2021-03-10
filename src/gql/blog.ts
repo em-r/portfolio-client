@@ -65,6 +65,7 @@ export const getCodeSnippets = gql`
         codeBlockCollection(where: { snippetTag_in: $tags }){
             total
             items {
+                language
                 snippets {
                     json
                 }
