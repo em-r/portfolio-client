@@ -9,6 +9,7 @@ export const getBlogs = gql`
                 title
                 summary
                 readTime
+                tags
                 sys {
                     id
                     firstPublishedAt

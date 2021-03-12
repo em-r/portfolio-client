@@ -10,7 +10,7 @@ export const Main = styled.main<{ width?: string, isHidden?: boolean }>`
   @media (min-width: 800px) {
     display: flex;
   }
-  header {
+  > header {
     font-size: 1.5rem;
     margin-bottom: 30px;
   }

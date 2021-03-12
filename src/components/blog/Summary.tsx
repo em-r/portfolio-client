@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { BiTimer, BiRightArrowCircle } from "react-icons/bi";
 import { FaCalendarAlt } from "react-icons/fa";
-import { Summary } from "../../styles/blog";
+import { BlogTags, Summary } from "../../styles/blog";
 
 type Props = {
   id: string;
@@ -13,6 +13,7 @@ type Props = {
   readTime: number;
   myRef?: (n: any) => void;
   routeId: string;
+  tags: string[];
 };
 
 const BlogSummary: React.FC<Props> = ({
@@ -21,6 +22,7 @@ const BlogSummary: React.FC<Props> = ({
   summary,
   readTime,
   routeId,
+  tags,
   myRef,
 }) => {
   return (
@@ -30,6 +32,14 @@ const BlogSummary: React.FC<Props> = ({
           <Link to={`/blogs/${routeId}`}>{title}</Link>
         </header>
         <p>{summary}</p>
+        <BlogTags>
+          {tags.map((tag, idx) => (
+            <li className="blog-tag" key={idx}>
+              {tag}
+              {/* <Link to={`/blog/${tag.toLowerCase()}`}>{tag}</Link> */}
+            </li>
+          ))}
+        </BlogTags>
       </section>
       <section className="meta-data">
         <p title="Posted on">

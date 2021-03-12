@@ -17,6 +17,7 @@ type Post = {
   readTime: number;
   publishedAt: string | Date;
   routeId: string;
+  tags: string[];
 };
 
 type BlogPostItem = {
@@ -24,6 +25,7 @@ type BlogPostItem = {
   summary: string;
   readTime: number;
   routeId: string;
+  tags: string[];
   sys: {
     id: string;
     firstPublishedAt: string | Date;
@@ -79,13 +81,14 @@ const Blog: React.FC = () => {
         blogPostCollection: { items },
       } = data;
       const blogPosts: Post[] = items.map(
-        ({ sys, title, summary, readTime, routeId }) => ({
+        ({ sys, title, summary, readTime, routeId, tags }) => ({
           id: sys.id,
           title,
           summary,
           readTime,
           publishedAt: sys.firstPublishedAt,
           routeId,
+          tags,
         })
       );
       setPosts(blogPosts.slice(0, perPage));

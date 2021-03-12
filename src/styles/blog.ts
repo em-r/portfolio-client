@@ -41,3 +41,17 @@ export const Summary = styled.section`
         align-items: stretch;
     }
 `;
+
+export const BlogTags = styled.ul`
+    display: flex;
+    gap: 5px;
+    list-style: none;
+    padding-left: 0;
+    margin-top: auto;
+    .blog-tag {
+        background: #f2f2f2;
+        color: #1d4354;
+        padding: 0 10px;
+        border-radius: 12px;
+    }
+`;
