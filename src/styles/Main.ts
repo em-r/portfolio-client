@@ -25,8 +25,6 @@ export const Main = styled.main<{ width?: string, isHidden?: boolean }>`
     display: flex;
     flex-direction: column;
     gap: 20px;
-  }
-  .projects {
     padding-bottom: 30px;
   }
   .project,

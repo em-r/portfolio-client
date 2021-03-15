@@ -1,8 +1,8 @@
 import React, {
   useState,
   useEffect,
-  useRef,
-  useCallback,
+  // useRef,
+  // useCallback,
   useContext,
 } from "react";
 import { useQuery } from "@apollo/client";
@@ -41,35 +41,14 @@ const Blog: React.FC = () => {
   const [total, setTotal] = useState<number>(0);
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
-  const [perPage] = useState<number>(2);
-  const [, setPageNum] = useState<number>(0);
+  const [perPage] = useState<number>(3);
+  // const [, setPageNum] = useState<number>(0);
   const { data } = useQuery<{
     blogPostCollection: BlogPostCollection;
   }>(getBlogs);
   const { dispatch } = useContext(globalContext);
 
-  const observer = useRef<any>();
-  const lastPostRef = useCallback(
-    (node: HTMLElement) => {
-      if (observer && observer.current) {
-        observer.current!.disconnect();
-      }
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && total > perPage) {
-          setPageNum((pageNum) => pageNum + 1);
-          setPosts([
-            ...posts,
-            ...allPosts.slice(posts.length, posts.length + perPage),
-          ]);
-        }
-      });
-      if (node) {
-        observer.current.observe(node);
-      }
-    },
-    // eslint-disable-next-line
-    [total]
-  );
+  // const observer = useRef<any>();
 
   useEffect(() => {
     document.title = "EMR - Blog";
@@ -106,7 +85,7 @@ const Blog: React.FC = () => {
       {posts &&
         posts.map((post, index) => {
           if (posts.length === index + 1) {
-            return <BlogSummary {...post} key={post.id} myRef={lastPostRef} />;
+            return <BlogSummary {...post} key={post.id} />;
           }
           return <BlogSummary {...post} key={post.id} />;
         })}

@@ -11,7 +11,6 @@ type Props = {
   publishedAt: string | Date;
   summary: string;
   readTime: number;
-  myRef?: (n: any) => void;
   routeId: string;
   tags: string[];
 };
@@ -23,10 +22,9 @@ const BlogSummary: React.FC<Props> = ({
   readTime,
   routeId,
   tags,
-  myRef,
 }) => {
   return (
-    <Summary ref={myRef}>
+    <Summary>
       <section className="body">
         <header>
           <Link to={`/blogs/${routeId}`}>{title}</Link>
