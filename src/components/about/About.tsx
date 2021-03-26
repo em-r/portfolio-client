@@ -33,7 +33,7 @@ const About: React.FC = () => {
   const [skills, setSkills] = useState<Skill[] | null>(null);
   const fetchSkills = useFetch<{ skills: Skill[] }>("skills");
   const {
-    globalState: { menuToggle },
+    globalState: { menuToggle, theme },
   } = useContext(globalContext);
 
   const emojis = ["👨🏻‍💻", "🚀", "✨", "💾", "🔗", "🐳"];
@@ -55,7 +55,17 @@ const About: React.FC = () => {
           👋🏻
         </span>
         , my name is Mehdi, I'm a software developer with a mechanical
-        engineering background.
+        engineering background. Also I'm the biggest fan of{" "}
+        <a
+          href="https://www.imdb.com/title/tt0386676/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span style={{ color: theme === "light" ? "#0555ea" : "#61dafb" }}>
+            The Office
+          </span>
+          .
+        </a>
       </header>
       <section>
         <header>Technical Skills:</header>
