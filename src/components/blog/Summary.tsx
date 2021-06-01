@@ -40,7 +40,7 @@ const BlogSummary: React.FC<Props> = ({
   routeId,
   tags,
 }) => {
-  const isOut = routeId.startsWith("http");
+  const isOut = !!routeId.match("^https?://");
   return (
     <Summary>
       <section className="body">
