@@ -20,13 +20,14 @@ const Home: React.FC = () => {
     globalState: { blogsLoaded },
   } = useContext(globalContext);
 
+  const blogsPerPage = 2;
   const [redirect, setRedirect] = useState<boolean>(false);
 
   if (redirect) return <Redirect to="/blog" />;
 
   return (
     <Main width="800px">
-      <Blog />
+      <Blog perPage={blogsPerPage} />
       {blogsLoaded && (
         <p style={{ textAlign: "center" }}>
           <Button onClick={() => setRedirect(!redirect)}>Browse Posts</Button>

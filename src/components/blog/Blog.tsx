@@ -37,18 +37,15 @@ type BlogPostCollection = {
   items: BlogPostItem[];
 };
 
-const Blog: React.FC = () => {
+const Blog: React.FC<{ perPage?: number }> = ({ perPage }) => {
   const [total, setTotal] = useState<number>(0);
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
-  const [perPage] = useState<number>(3);
-  // const [, setPageNum] = useState<number>(0);
-  const { data } = useQuery<{
-    blogPostCollection: BlogPostCollection;
-  }>(getBlogs);
+  const { data } =
+    useQuery<{
+      blogPostCollection: BlogPostCollection;
+    }>(getBlogs);
   const { dispatch } = useContext(globalContext);
-
-  // const observer = useRef<any>();
 
   useEffect(() => {
     document.title = "EMR - Blog";
@@ -70,7 +67,12 @@ const Blog: React.FC = () => {
           tags,
         })
       );
-      setPosts(blogPosts.slice(0, perPage));
+      if (perPage) {
+        setPosts(blogPosts.slice(0, perPage));
+      } else {
+        setPosts(blogPosts);
+      }
+      // setPosts(blogPosts.slice(0, perPage));
       setAllPosts(blogPosts);
       setTotal(total);
       dispatch({ type: "BLOGS_LOADED" });
