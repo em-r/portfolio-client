@@ -5,6 +5,23 @@ import { BiTimer, BiRightArrowCircle } from "react-icons/bi";
 import { FaCalendarAlt } from "react-icons/fa";
 import { BlogTags, Summary } from "../../styles/blog";
 
+type LinkProps = {
+  children: string | React.ReactNode;
+  isOut: boolean;
+  href: string;
+};
+
+const BlogLink: React.FC<LinkProps> = ({ href, isOut, children }) => {
+  if (isOut) {
+    return (
+      <a href={`${href}`} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    );
+  }
+  return <Link to={`/blogs/${href}`}>{children}</Link>;
+};
+
 type Props = {
   id: string;
   title: string;
@@ -23,18 +40,20 @@ const BlogSummary: React.FC<Props> = ({
   routeId,
   tags,
 }) => {
+  const isOut = routeId.startsWith("http");
   return (
     <Summary>
       <section className="body">
         <header>
-          <Link to={`/blogs/${routeId}`}>{title}</Link>
+          <BlogLink href={routeId} isOut={isOut}>
+            {title}
+          </BlogLink>
         </header>
         <p>{summary}</p>
         <BlogTags>
           {tags.map((tag, idx) => (
             <li className="blog-tag" key={idx}>
               {tag}
-              {/* <Link to={`/blog/${tag.toLowerCase()}`}>{tag}</Link> */}
             </li>
           ))}
         </BlogTags>
@@ -51,9 +70,9 @@ const BlogSummary: React.FC<Props> = ({
           <span>{readTime} mins</span>
         </p>
         <p title="Read article">
-          <Link to={`/blogs/${routeId}`}>
+          <BlogLink href={routeId} isOut={isOut}>
             <BiRightArrowCircle size={30} style={{ cursor: "pointer" }} />
-          </Link>
+          </BlogLink>
         </p>
       </section>
     </Summary>

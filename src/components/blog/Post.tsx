@@ -65,13 +65,10 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
     variables: { route: routeId },
   });
 
-  const [loadAssets, { data: assetsData }] = useLazyQuery<BlogPostWithAssets>(
-    getBlogAssets
-  );
-  const [
-    loadSnippets,
-    { data: snippetsData },
-  ] = useLazyQuery<BlogPostsWithCode>(getCodeSnippets);
+  const [loadAssets, { data: assetsData }] =
+    useLazyQuery<BlogPostWithAssets>(getBlogAssets);
+  const [loadSnippets, { data: snippetsData }] =
+    useLazyQuery<BlogPostsWithCode>(getCodeSnippets);
 
   const renderOptions: Options = {
     renderNode: {
@@ -182,19 +179,13 @@ const BlogDetails: React.FC<RouteComponentProps<{ routeId: string }>> = ({
     <Main width="800px" isHidden={menuToggle}>
       <header style={{ display: "flex" }}>
         <span style={{ flex: 3 }}>{post.title}</span>
-        <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+        <div style={{ display: "flex", flex: 1, alignItems: "center", gap: 5 }}>
           {post.github && (
-            <a
-              href={post.github}
-              style={{ display: "flex", alignItems: "center", gap: 5 }}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={post.github} target="_blank" rel="noopener noreferrer">
               <FaGithub />
-              <span>Repo</span>
             </a>
           )}
-          <small className="date">
+          <small className="date" style={{ fontSize: 12 }}>
             {dayjs(post!.firstPublishedAt).format("DD/MM/YYYY")}
           </small>
         </div>
