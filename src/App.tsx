@@ -4,6 +4,8 @@ import GlobalContextProvider from "./store/globalContext";
 import { useFetch } from "./hooks";
 import Wrapper from "./components/Wrapper";
 
+import ReactGA from 'react-ga';
+
 const client = new ApolloClient({
   uri: `https://graphql.contentful.com/content/v1/spaces/${process.env.REACT_APP_SPACE_ID}`,
   credentials: "same-origin",
@@ -24,6 +26,10 @@ const App: React.FC = () => {
     getJwt();
     // eslint-disable-next-line
   }, []);
+
+
+  ReactGA.pageview(window.location.pathname + window.location.search);
+
   return (
     <GlobalContextProvider>
       <ApolloProvider client={client}>

@@ -11,8 +11,7 @@ import ReactGA from "react-ga";
 dotenv.config();
 
 // initialize Google Analytics
-ReactGA.initialize("G-RDF7XXNV4V");
-ReactGA.pageview(window.location.pathname + window.location.search);
+ReactGA.initialize("UA-198460711-1");
 
 ReactDOM.render(
   <React.StrictMode>
