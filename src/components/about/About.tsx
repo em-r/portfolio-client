@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Main } from "../../styles/Main";
-import { useFetch } from "../../hooks";
 import { globalContext } from "../../store/globalContext";
+import { useQuery } from "@apollo/client";
+import { getSkills } from "../../gql/skills";
 
 type Skill = {
   title: string;
   stack: string[];
+};
+
+type SkillCollection = {
+  items: Skill[];
 };
 
 type Props = {
@@ -31,7 +36,7 @@ const RenderSkill: React.FC<Props> = ({ skill, emoji }) => {
 
 const About: React.FC = () => {
   const [skills, setSkills] = useState<Skill[] | null>(null);
-  const fetchSkills = useFetch<{ skills: Skill[] }>("skills");
+  const { data } = useQuery<{ skillsCollection: SkillCollection }>(getSkills);
   const {
     globalState: { menuToggle, theme },
   } = useContext(globalContext);
@@ -39,14 +44,13 @@ const About: React.FC = () => {
   const emojis = ["👨🏻‍💻", "🚀", "✨", "💾", "🔗", "🐳"];
   useEffect(() => {
     document.title = "EMR - About";
-    const skillsList = async () => {
-      const list = await fetchSkills;
-      if (!list) return;
-      setSkills(list.skills);
-    };
-    skillsList();
-    // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (!data) return;
+    setSkills(data.skillsCollection.items);
+  }, [data]);
+
   return (
     <Main width="800px" isHidden={menuToggle}>
       <header>
